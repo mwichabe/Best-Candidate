@@ -1,3 +1,4 @@
+import 'package:best_candidate/Dashboard/home.dart';
 import 'package:best_candidate/constance/constance.dart';
 import 'package:best_candidate/introduction/forgot/reset_password.dart';
 import 'package:best_candidate/introduction/signUp/sign_up.dart';
@@ -204,6 +205,7 @@ class _LogInState extends State<LogIn> {
                 width: 160,
                 child: ElevatedButton(
                   onPressed: () {
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const Home()));
                     // signIn(_emailController.text, _passwordController.text);
                   },
                   style: ElevatedButton.styleFrom(
