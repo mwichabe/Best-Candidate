@@ -33,7 +33,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer:const CustomNavigationDraer(),
+      endDrawer:const CustomNavigationDraer(),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text('Best Candidate'),
