@@ -2,7 +2,9 @@ import 'package:best_candidate/Dashboard/home.dart';
 import 'package:best_candidate/constance/constance.dart';
 import 'package:best_candidate/introduction/forgot/reset_password.dart';
 import 'package:best_candidate/introduction/signUp/sign_up.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
@@ -19,13 +21,15 @@ class _LogInState extends State<LogIn> {
 
   bool isLoading = false;
   bool _passwordVisible = true;
-  bool isCheckedRememberMe = false;
   final _formKey = GlobalKey<FormState>();
   //firebase
   //final _auth = FirebaseAuth.instance;
   //form key
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  //
+    //firebase
+  final _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -205,8 +209,7 @@ class _LogInState extends State<LogIn> {
                 width: 160,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const Home()));
-                    // signIn(_emailController.text, _passwordController.text);
+                    signIn(_emailController.text, _passwordController.text);
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: lightGreyColor,
@@ -258,5 +261,73 @@ class _LogInState extends State<LogIn> {
         )),
       ),
     );
+  }
+   void signIn(String email, String password) async {
+   if (_formKey.currentState!.validate()) {
+      setState(() {
+        isLoading = true;
+      });
+
+      try {
+        // Perform sign-in
+        var userCredential = await _auth.signInWithEmailAndPassword(
+          email: _emailController.text,
+          password: _passwordController.text,
+        );
+
+        setState(() {
+          isLoading = false;
+        });
+
+        // Navigate to home screen
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => const Home()));
+
+        // Show success message
+        Fluttertoast.showToast(
+          msg: 'Login Successful',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          backgroundColor: Colors.green,
+          timeInSecForIosWeb: 1,
+          fontSize: 16,
+        );
+      } catch (e) {
+        print(e.toString());
+
+        setState(() {
+          isLoading = false;
+        });
+
+        // Show error message
+        String errorMessage = 'An error occurred during sign-in.';
+        if (e is FirebaseAuthException) {
+          switch (e.code) {
+            case 'invalid-email':
+              errorMessage = 'Invalid email address.';
+              break;
+            case 'user-not-found':
+              errorMessage = 'User not found. Please check your credentials.';
+              break;
+            case 'wrong-password':
+              errorMessage =
+                  'Invalid password. Please check your password and try again.';
+              break;
+            // Add more cases for other possible error codes
+            default:
+              errorMessage =
+                  'An error occurred during sign-in.Check your internet connectivity and try again later.';
+          }
+        }
+        Fluttertoast.showToast(
+          msg: errorMessage,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          backgroundColor: Colors.red,
+          timeInSecForIosWeb: 1,
+          fontSize: 16,
+        );
+      }
+    }
   }
 }

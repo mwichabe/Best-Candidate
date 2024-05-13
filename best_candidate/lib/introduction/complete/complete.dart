@@ -164,14 +164,14 @@ class _CompleteSetupState extends State<CompleteSetup> {
                   children: [
                     const Icon(
                       Icons.person_2_outlined,
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
                     const SizedBox(
                       width: 3,
                     ),
                     Text(
                       '${loggedInUser.userName}',
-                      style: const TextStyle(color: Colors.black),
+                      style: const TextStyle(color: blueColor),
                     ),
                   ],
                 ),
@@ -185,14 +185,14 @@ class _CompleteSetupState extends State<CompleteSetup> {
                   children: [
                     const Icon(
                       Icons.phone_outlined,
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
                     const SizedBox(
                       width: 3,
                     ),
                     Text(
                       '${loggedInUser.phoneNumber}',
-                      style: const TextStyle(color: Colors.black),
+                      style: const TextStyle(color: blueColor),
                     ),
                   ],
                 ),

@@ -15,32 +15,13 @@ class _BuildingCvState extends State<BuildingCv> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
-        title: const Text('Build your Resume'),
+        title: const Text('Generate your Resume'),
         centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-GestureDetector(
-              onTap: () {
-              //
-              },
-              child: const SizedBox(
-                width: double.infinity,
-                child: Card(
-                  color: Colors.blue,
-                  elevation: 4,
-                  child: Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: Text(
-                      'Sample Resume',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
-                  ),
-                ),
-              ),
-            ),
             const SizedBox(height: 16,),
              GestureDetector(
               onTap: () {
@@ -61,7 +42,7 @@ GestureDetector(
                 ),
               ),
             ),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
             const Align(
                 alignment: Alignment.topLeft,
                 child: Text(

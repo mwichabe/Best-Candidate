@@ -49,6 +49,7 @@ dependencies:
   url_launcher: ^6.2.6
   http: ^1.2.1
   mpesa_flutter_plugin: ^1.6.1
+  intl: ^0.17.0
 
 
 dev_dependencies:

@@ -1,3 +1,4 @@
+import 'package:best_candidate/Dashboard/Payment/make_order.dart';
 import 'package:best_candidate/Dashboard/Payment/payment.dart';
 import 'package:flutter/material.dart';
 
@@ -49,7 +50,7 @@ class _PortfolioDialogState extends State<PortfolioDialog> {
           onPressed: _termsAccepted
               ? () {
                   Navigator.of(context).pop(); 
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>PaymentMethod()));
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MakeOrder()));
                 }
               : null,
           child: const Text('Continue'),

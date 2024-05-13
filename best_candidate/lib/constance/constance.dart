@@ -61,6 +61,8 @@ class ConstanceData {
   static String bseImageUrl = 'assets/images/';
   static String splashBg = bseImageUrl + "background.png";
   static String logo = bseImageUrl + "Best_candidate.png";
+  static String success = bseImageUrl + "success.jpg";
+  static String cartEmpty = bseImageUrl + "cart_empty.png";
 
 
   ////////////////////////////////////////////

@@ -1,7 +1,14 @@
+import 'dart:developer';
+
 import 'package:best_candidate/constance/constance.dart';
+import 'package:best_candidate/introduction/complete/complete.dart';
 import 'package:best_candidate/introduction/login/login.dart';
 import 'package:best_candidate/introduction/widgets/our_text_field.dart';
+import 'package:best_candidate/models/signUp.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -12,24 +19,18 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   bool isLoading = false;
-  //final _auth = FirebaseAuth.instance;
+  final _auth = FirebaseAuth.instance;
   //form key
   final _formKey = GlobalKey<FormState>();
   //editing Controllers
-  final TextEditingController _nameEditingController = TextEditingController();
   final TextEditingController _emailEditingController = TextEditingController();
   final TextEditingController phoneEditingController = TextEditingController();
   final TextEditingController _passwordEditingController =
       TextEditingController();
-  final TextEditingController _confirmPasswordEditingController =
-      TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _userNameController = TextEditingController();
-  //
-  bool _passwordVisible = false;
-  bool _confirmPassVisible = false;
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -94,7 +95,7 @@ class _SignUpState extends State<SignUp> {
                         OurTextFormField(
                             label: "Phone",
                             pasVisible: false,
-                            controller: _phoneController,
+                            controller: phoneEditingController,
                             validatorText: 'Phone Required',
                             regEx: '',
                             regExValidatorText: '',
@@ -130,7 +131,7 @@ class _SignUpState extends State<SignUp> {
                           pasVisible: false,
                           controller: _lastNameController,
                         ),
-                         SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         OurTextFormField(
@@ -143,19 +144,20 @@ class _SignUpState extends State<SignUp> {
                           controller: _userNameController,
                           pasVisible: false,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         OurTextFormField(
                           label: 'Create your Password',
                           validatorText: 'Please enter your password.',
-                          regEx: r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!$@#&*~]).{6,}$',
+                          regEx:
+                              r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!$@#&*~]).{6,}$',
                           regExValidatorText: 'Password should: \n'
-                                ' Have at least 6 characters\n '
-                                'Have a symbol \n'
-                                'Have an uppercase \n'
-                                'Have a numeric number \n'
-                                'eg. Best@1',
+                              ' Have at least 6 characters\n '
+                              'Have a symbol \n'
+                              'Have an uppercase \n'
+                              'Have a numeric number \n'
+                              'eg. Best@1',
                           keyboardType: TextInputType.text,
                           iconData: Icons.key,
                           controller: _passwordEditingController,
@@ -163,56 +165,131 @@ class _SignUpState extends State<SignUp> {
                         ),
                       ],
                     )),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GestureDetector(
-                                      child: const Row(
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        children: [
-                      Text(
-                        'Login ',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.start,
-                      ),
-                                        ],
-                                      ),
-                                      onTap: () {
-                                        Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const LogIn()));
-                                      },
-                                    ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GestureDetector(
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Login ',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.start,
+                        ),
+                      ],
                     ),
-              const SizedBox(
-                height: 30,
-              ),
-              SizedBox(
-                height: 40,
-                width: 160,
-                child: ElevatedButton(
-                  onPressed: () {
-                    //
-                  },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: lightGreyColor,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10))),
-                  child: const Text(
-                    'Sign Up',
-                    style: TextStyle(
-                        color: Colors.black, fontWeight: FontWeight.bold),
+                    onTap: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LogIn()));
+                    },
                   ),
                 ),
-              ),
+                const SizedBox(
+                  height: 30,
+                ),
+                SizedBox(
+                  height: 40,
+                  width: 160,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      //
+                       register(_emailEditingController.text,
+                              _passwordEditingController.text);
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: lightGreyColor,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10))),
+                    child: const Text(
+                      'Sign Up',
+                      style: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  postDetailsToFirestore() async {
+    // calling firestore
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    User? user = _auth.currentUser;
+    //calling usermodel
+    UserModelOne userModel = UserModelOne(uid: '');
+    // sending content
+    userModel.email = user!.email;
+    userModel.uid = user.uid;
+    userModel.firstName = _firstNameController.text;
+    userModel.userName = _userNameController.text;
+    userModel.lastName = _lastNameController.text;
+    userModel.phoneNumber = phoneEditingController.text;
+    await firebaseFirestore
+        .collection('users')
+        .doc(user.uid)
+        .set(userModel.toMap());
+    Navigator.pushReplacement((context),
+        MaterialPageRoute(builder: (context) => const CompleteSetup()));
+    Fluttertoast.showToast(
+      msg: 'Account created successfully',
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      backgroundColor: Colors.green,
+      timeInSecForIosWeb: 1,
+      fontSize: 16,
+    );
+  }
+
+  void register(String email, String password) async {
+    if (_formKey.currentState!.validate()) {
+      setState(() {
+        isLoading = true;
+      });
+      await _auth
+          .createUserWithEmailAndPassword(
+              email: _emailEditingController.text,
+              password: _passwordEditingController.text)
+          .then((value) => {postDetailsToFirestore()})
+          .catchError((e) {
+        log(e!.message);
+        // Show error message
+        String errorMessage = 'An error occurred during sign-up.';
+        if (e is FirebaseAuthException) {
+          switch (e.code) {
+            case 'weak-password':
+              errorMessage =
+                  'The password is too weak. Please use a stronger password.';
+              break;
+            case 'email-already-in-use':
+              errorMessage =
+                  'The email address is already in use. Please choose a different email.';
+              break;
+            default:
+              errorMessage =
+                  'An error occurred while creating your account. Check your internet connectivity and try again later.';
+          }
+        }
+        Fluttertoast.showToast(
+          msg: errorMessage,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          backgroundColor: Colors.red,
+          timeInSecForIosWeb: 1,
+          fontSize: 16,
+        );
+      });
+    }
+    setState(() {
+      isLoading = false;
+    });
   }
 }
