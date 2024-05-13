@@ -1,6 +1,6 @@
 import 'package:best_candidate/Dashboard/home.dart';
 import 'package:best_candidate/introduction/login/login.dart';
-import 'package:best_candidate/models/full_photo.dart';
+import 'package:best_candidate/widgets/full_photo.dart';
 import 'package:best_candidate/models/signUp.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

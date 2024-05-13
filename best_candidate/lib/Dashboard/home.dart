@@ -1,6 +1,7 @@
 
 import 'package:best_candidate/Dashboard/BuildingCv/building_cv.dart';
 import 'package:best_candidate/Dashboard/Drawer/navigation_drawer.dart';
+import 'package:best_candidate/Dashboard/Orders/my_orders.dart';
 import 'package:best_candidate/Dashboard/Portfolio/portfolio.dart';
 import 'package:best_candidate/Dashboard/dashboard/dashboard.dart';
 import 'package:best_candidate/constance/constance.dart';
@@ -21,6 +22,7 @@ class _HomeState extends State<Home> {
     const Dashboard(),
     const Portfolio(),
     const BuildingCv(),
+    const Orders(),
   ];
   void _onItemTapped(int index) {
     setState(() {
@@ -34,7 +36,7 @@ class _HomeState extends State<Home> {
       drawer:const CustomNavigationDraer(),
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text('Best Candidate'),
+        title: const Text('Best Candidate'),
         centerTitle: true,
       ),
       body: IndexedStack(
