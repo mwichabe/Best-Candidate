@@ -1,4 +1,5 @@
 import 'package:best_candidate/Dashboard/BuildingCv/nearbyOrganisations.dart';
+import 'package:best_candidate/Dashboard/BuildingCv/plan_selection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -26,7 +27,10 @@ class _BuildingCvState extends State<BuildingCv> {
             const SizedBox(height: 16,),
              GestureDetector(
               onTap: () {
-             //
+             
+             showDialog(context: context,
+              builder: (context)=> PlanSelectionDialog()
+              );
               },
               child: const SizedBox(
                 width: double.infinity,
