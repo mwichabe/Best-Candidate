@@ -1,3 +1,4 @@
+import 'package:best_candidate/Dashboard/BuildingCv/nearbyOrganisations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -68,7 +69,9 @@ class _BuildingCvState extends State<BuildingCv> {
                     ),
                     borderRadius: const BorderRadius.all(Radius.circular(10))
                   ),
-                  child: const Text('Map will be here')
+                  child: const Center(child: SingleChildScrollView(child: NearbyOrganisations())
+                  
+                  )
                   ,),
               ),
             )
