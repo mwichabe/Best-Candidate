@@ -12,12 +12,12 @@ class _PlanSelectionDialogState extends State<PlanSelectionDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Choose Your Plan'),
+      title: const Text('Choose Your Plan'),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           ListTile(
-            title: Text('Free'),
+            title: const Text('Free'),
             leading: Radio(
               value: 'Free',
               groupValue: _selectedPlan,
@@ -29,7 +29,7 @@ class _PlanSelectionDialogState extends State<PlanSelectionDialog> {
             ),
           ),
           ListTile(
-            title: Text('Premium'),
+            title: const Text('Premium'),
             leading: Radio(
               value: 'Premium',
               groupValue: _selectedPlan,
@@ -47,15 +47,14 @@ class _PlanSelectionDialogState extends State<PlanSelectionDialog> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: Text('Cancel'),
+          child: const Text('Cancel'),
         ),
         ElevatedButton(
           onPressed: () {
-            // Do something with the selected plan
             print('Selected plan: $_selectedPlan');
             Navigator.pushReplacement(context, MaterialPageRoute(builder: ((context) => Resume(selectedPlan: _selectedPlan,))));
           },
-          child: Text('Select'),
+          child: const Text('Select'),
         ),
       ],
     );

@@ -1,4 +1,5 @@
 import 'package:best_candidate/Dashboard/home.dart';
+import 'package:best_candidate/constance/constance.dart';
 import 'package:best_candidate/introduction/login/login.dart';
 import 'package:best_candidate/widgets/full_photo.dart';
 import 'package:best_candidate/models/signUp.dart';
@@ -68,7 +69,7 @@ class _CustomNavigationDraerState extends State<CustomNavigationDraer> {
                           const CircularProgressIndicator(),
                       errorWidget: (context, url, error) => const Icon(
                         Icons.person,
-                        color: Colors.indigo,
+                        color: primarycolor,
                         size: 20,
                       ),
                       fit: BoxFit.cover,
