@@ -1,4 +1,5 @@
 import 'package:best_candidate/Dashboard/home.dart';
+import 'package:best_candidate/Dashboard/profile/profile.dart';
 import 'package:best_candidate/constance/constance.dart';
 import 'package:best_candidate/introduction/login/login.dart';
 import 'package:best_candidate/widgets/full_photo.dart';
@@ -97,8 +98,8 @@ class _CustomNavigationDraerState extends State<CustomNavigationDraer> {
               color: Colors.white,
             ),
             title: const Text('Profile', style: TextStyle(color: Colors.white)),
-            onTap: () => Navigator.pushReplacementNamed(
-                context,''),
+            onTap: () => Navigator.pushReplacement(
+                context,MaterialPageRoute(builder: (context)=>Profile())),
           ),
           ListTile(
             leading: const Icon(Icons.people, color: Colors.white),

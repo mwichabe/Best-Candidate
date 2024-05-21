@@ -4,10 +4,17 @@ import 'package:best_candidate/models/signUp.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:flutter/services.dart' show rootBundle;
 
 class Final extends StatefulWidget {
   final String selectedPlan;
-  const Final({super.key, required this.selectedPlan});
+  Final({super.key, required this.selectedPlan});
 
   @override
   State<Final> createState() => _FinalState();
@@ -56,7 +63,27 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
               if (snapshot.hasData) {
                 final resumeDoc = snapshot.data!.docs;
                 if (resumeDoc.isEmpty) {
-                  return const Center(child: CircleAvatar());
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('Please add details for your resume to be generated'),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Home()));
+                          },
+                          child: const Center(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text('Home'),
+                            ),
+                          )),
+                      ],
+                    ),
+                  );
                 }
 
                 return Padding(
@@ -156,7 +183,7 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                                 ),
                                 Text(
                                     'Worked at $companyName, from $startEndDate, I was able to sharpen my skills in $skills. \n  The Working environment was favourable and had fair salary'),
-                                    const Divider(
+                                const Divider(
                                   color: primarycolor,
                                 ),
                                 const Row(
@@ -169,8 +196,16 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                                     )
                                   ],
                                 ),
-                                Text('Got a $category from',style: const TextStyle(fontSize: 16),),
-                                Text(institutionName,style: const TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+                                Text(
+                                  'Got a $category from',
+                                  style: const TextStyle(fontSize: 16),
+                                ),
+                                Text(
+                                  institutionName,
+                                  style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
                                 const Divider(
                                   color: primarycolor,
                                 ),
@@ -184,7 +219,256 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                                     )
                                   ],
                                 ),
-                                Text(skills.toString())
+                                Text(skills.toString()),
+                                const SizedBox(
+                                  height: 16,
+                                ),
+                                Row(
+                                  children: [
+                                    InkWell(
+                                      onTap: () => deleteResume(
+                                          resumeDoc[index].reference),
+                                      child: Container(
+                                        decoration: const BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10)),
+                                            color: Colors.red),
+                                        child: const Padding(
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Text(
+                                            'Delete',
+                                            style: TextStyle(
+                                                color: primarycolor,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 5,),
+                                    ElevatedButton(
+                                        onPressed: () async {
+                                          final Directory? directory;
+                                          final image = pw.MemoryImage(
+                                            (await rootBundle
+                                                    .load(ConstanceData.logo))
+                                                .buffer
+                                                .asUint8List(),
+                                          );
+                                          try {
+                                            final doc = pw.Document();
+                                            doc.addPage(pw.Page(
+                                                pageFormat: PdfPageFormat.a4,
+                                                build: (pw.Context context) {
+                                                  return pw.Container(
+                                                    color: PdfColor.fromInt(
+                                                        Colors.grey.value),
+                                                    child: pw.Padding(
+                                                      padding:
+                                                          const pw.EdgeInsets.all(
+                                                              8.0),
+                                                      child: pw.Column(
+                                                        children: [
+                                                          pw.Row(
+                                                            mainAxisAlignment: pw
+                                                                .MainAxisAlignment
+                                                                .spaceBetween,
+                                                            children: [
+                                                              // NetworkImage('${loggedInUser.profilePictureUrl}'),
+                                    
+                                                              pw.Text(
+                                                                '${loggedInUser.firstName} \n ${loggedInUser.lastName}',
+                                                                style: pw.TextStyle(
+                                                                    color: PdfColor
+                                                                        .fromInt(Colors
+                                                                            .green
+                                                                            .value),
+                                                                    fontWeight: pw
+                                                                        .FontWeight
+                                                                        .bold,
+                                                                    fontSize: 22,
+                                                                    letterSpacing:
+                                                                        1.5),
+                                                              ),
+                                                              pw.Spacer(),
+                                                              pw.Column(
+                                                                mainAxisAlignment: pw
+                                                                    .MainAxisAlignment
+                                                                    .spaceAround,
+                                                                children: [
+                                                                  pw.Text(
+                                                                    '${loggedInUser.email}',
+                                                                    style: pw.TextStyle(
+                                                                        fontWeight: pw
+                                                                            .FontWeight
+                                                                            .bold,
+                                                                        color: PdfColor
+                                                                            .fromInt(Colors
+                                                                                .blue
+                                                                                .value),
+                                                                        fontSize:
+                                                                            12),
+                                                                  ),
+                                                                  pw.Text(
+                                                                    '${loggedInUser.phoneNumber}',
+                                                                    style: pw.TextStyle(
+                                                                        fontWeight: pw
+                                                                            .FontWeight
+                                                                            .bold,
+                                                                        color: PdfColor
+                                                                            .fromInt(Colors
+                                                                                .blue
+                                                                                .value),
+                                                                        fontSize:
+                                                                            12),
+                                                                  ),
+                                                                  pw.Text(
+                                                                    '${loggedInUser.address}',
+                                                                    style: pw.TextStyle(
+                                                                        fontWeight: pw
+                                                                            .FontWeight
+                                                                            .bold,
+                                                                        color: PdfColor
+                                                                            .fromInt(Colors
+                                                                                .blue
+                                                                                .value),
+                                                                        fontSize:
+                                                                            12),
+                                                                  )
+                                                                ],
+                                                              )
+                                                            ],
+                                                          ),
+                                                          pw.Padding(
+                                                            padding: const pw
+                                                                .EdgeInsets.all(
+                                                                8.0),
+                                                            child: pw.Text(
+                                                              jobTitle,
+                                                              style: const pw
+                                                                  .TextStyle(
+                                                                fontSize: 24,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          pw.Padding(
+                                                            padding: const pw
+                                                                .EdgeInsets.all(
+                                                                8.0),
+                                                            child: pw.Text(
+                                                                '${loggedInUser.bio}'),
+                                                          ),
+                                                          pw.Row(
+                                                            mainAxisAlignment: pw
+                                                                .MainAxisAlignment
+                                                                .start,
+                                                            children: [
+                                                              pw.Text(
+                                                                'Professional Experience',
+                                                                style: pw.TextStyle(
+                                                                    color: PdfColor
+                                                                        .fromInt(Colors
+                                                                            .green
+                                                                            .value),
+                                                                    fontSize: 18),
+                                                              )
+                                                            ],
+                                                          ),
+                                                          pw.Divider(
+                                                            color: PdfColor.fromInt(
+                                                                Colors.green.value),
+                                                          ),
+                                                          pw.Text(
+                                                              'Worked at $companyName, from $startEndDate, I was able to sharpen my skills in $skills. \n  The Working environment was favourable and had fair salary'),
+                                                          pw.Divider(
+                                                            color: PdfColor.fromInt(
+                                                                Colors.green.value),
+                                                          ),
+                                                          pw.Row(
+                                                            mainAxisAlignment: pw
+                                                                .MainAxisAlignment
+                                                                .start,
+                                                            children: [
+                                                              pw.Text(
+                                                                'Education',
+                                                                style: pw.TextStyle(
+                                                                    color: PdfColor
+                                                                        .fromInt(Colors
+                                                                            .green
+                                                                            .value),
+                                                                    fontSize: 18),
+                                                              )
+                                                            ],
+                                                          ),
+                                                          pw.Text(
+                                                            'Got a $category from',
+                                                            style:
+                                                                const pw.TextStyle(
+                                                                    fontSize: 16),
+                                                          ),
+                                                          pw.Text(
+                                                            institutionName,
+                                                            style: pw.TextStyle(
+                                                                fontSize: 18,
+                                                                fontWeight: pw
+                                                                    .FontWeight
+                                                                    .bold),
+                                                          ),
+                                                          pw.Divider(
+                                                            color: PdfColor.fromInt(
+                                                                Colors.green.value),
+                                                          ),
+                                                          pw.Row(
+                                                            mainAxisAlignment: pw
+                                                                .MainAxisAlignment
+                                                                .start,
+                                                            children: [
+                                                              pw.Text(
+                                                                'Key Skills:',
+                                                                style: pw.TextStyle(
+                                                                    color: PdfColor
+                                                                        .fromInt(Colors
+                                                                            .green
+                                                                            .value),
+                                                                    fontSize: 18),
+                                                              )
+                                                            ],
+                                                          ),
+                                                          pw.Text(skills.toString())
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  );
+                                                }));
+                                    
+                                            if (Platform.isIOS) {
+                                              directory =
+                                                  await getApplicationDocumentsDirectory();
+                                            } else {
+                                              directory =
+                                                  await getDownloadsDirectory();
+                                            }
+                                    
+                                            if (directory == null) {
+                                              Fluttertoast.showToast(
+                                                  msg:
+                                                      'Document directory not available');
+                                              return;
+                                            }
+                                            String path = directory.path;
+                                            String myFile =
+                                                '${path}/myresume-${loggedInUser.userName}.pdf';
+                                            final file = File(myFile);
+                                            await file
+                                                .writeAsBytes(await doc.save());
+                                            OpenFile.open(myFile);
+                                          } catch (e) {
+                                            debugPrint("$e");
+                                            Fluttertoast.showToast(msg: '$e');
+                                          }
+                                        },
+                                        child: const Icon(Icons.download)),
+                                  ],
+                                ),
                               ],
                             ),
                           ),
@@ -215,5 +499,15 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
               ],
             )),
           );
+  }
+
+  void deleteResume(DocumentReference requestRef) {
+    requestRef.delete().then((value) {
+      Fluttertoast.showToast(msg: 'Resume Deleted');
+      print('Deleted');
+    }).catchError((error) {
+      Fluttertoast.showToast(msg: 'Error deleting resume: $error');
+      print('Error deleting resume: $error');
+    });
   }
 }
