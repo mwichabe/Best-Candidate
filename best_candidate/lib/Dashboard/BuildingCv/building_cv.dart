@@ -51,7 +51,7 @@ class _BuildingCvState extends State<BuildingCv> {
             const Align(
                 alignment: Alignment.topLeft,
                 child: Text(
-                  'See organisations near you \n Go get the job!',
+                  'See organisations\n Go get the job!',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

@@ -62,246 +62,264 @@ class _CompleteSetupState extends State<CompleteSetup> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-      return Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            image: AssetImage(ConstanceData.splashBg),
-          ),
-        ),
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(
-              10,
-              60,
-              20,
-              40,
+    bool canPop = false;
+    return PopScope(
+       canPop: canPop,
+      onPopInvoked: (bool value) {
+        setState(() {
+          canPop= !value;
+        });
+
+        if (canPop) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Click once more to exit"),
+              duration: Duration(milliseconds: 1500),
             ),
-            child: Column(
-              children: [
-                Center(
-                  child: Container(
-                    width: 200,
-                    decoration: const BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.fromLTRB(2, 2, 10, 2),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.person,
-                            color: Colors.white,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            'Complete Your Profile',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ],
+          );
+        }
+      },
+      child: Scaffold(body: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+        return Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: AssetImage(ConstanceData.splashBg),
+            ),
+          ),
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(
+                10,
+                60,
+                20,
+                40,
+              ),
+              child: Column(
+                children: [
+                  Center(
+                    child: Container(
+                      width: 200,
+                      decoration: const BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.fromLTRB(2, 2, 10, 2),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.person,
+                              color: Colors.white,
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              'Complete Your Profile',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Stack(
-                  children: [
-                    CircleAvatar(
-                      radius: 64,
-                      backgroundColor: Colors.white,
-                      child: ClipOval(
-                        child: SizedBox(
-                            height: 180,
-                            width: 180,
-                            child: _image != null
-                                ? Image.file(
-                                    _image!,
-                                    fit: BoxFit.fill,
-                                    height: 180,
-                                    width: 180,
-                                  )
-                                : Image.network(
-                                    loggedInUser.profilePictureUrl ??
-                                        '',
-                                    fit: BoxFit.cover,
-                                    width: 140,
-                                    height: 140,
-                                    errorBuilder:
-                                        (context, error, stackTrace) =>
-                                            const Icon(Icons.error),
-                                  )),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Stack(
+                    children: [
+                      CircleAvatar(
+                        radius: 64,
+                        backgroundColor: Colors.white,
+                        child: ClipOval(
+                          child: SizedBox(
+                              height: 180,
+                              width: 180,
+                              child: _image != null
+                                  ? Image.file(
+                                      _image!,
+                                      fit: BoxFit.fill,
+                                      height: 180,
+                                      width: 180,
+                                    )
+                                  : Image.network(
+                                      loggedInUser.profilePictureUrl ??
+                                          '',
+                                      fit: BoxFit.cover,
+                                      width: 140,
+                                      height: 140,
+                                      errorBuilder:
+                                          (context, error, stackTrace) =>
+                                              const Icon(Icons.error),
+                                    )),
+                        ),
                       ),
-                    ),
-                    Positioned(
-                      bottom: -10,
-                      left: 80,
-                      child: IconButton(
-                          onPressed: _pickImage,
-                          icon: const CircleAvatar(
-                            radius: 20,
-                            backgroundColor: Colors.white,
-                            child: Icon(
-                              Icons.add_a_photo,
-                              color: Colors.black,
-                            ),
-                          )),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.person_2_outlined,
-                      color: Colors.white,
-                    ),
-                    const SizedBox(
-                      width: 3,
-                    ),
-                    Text(
-                      '${loggedInUser.userName}',
-                      style: const TextStyle(color: blueColor),
-                    ),
-                  ],
-                ),
-                const Divider(
-                  color: Colors.grey,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.phone_outlined,
-                      color: Colors.white,
-                    ),
-                    const SizedBox(
-                      width: 3,
-                    ),
-                    Text(
-                      '${loggedInUser.phoneNumber}',
-                      style: const TextStyle(color: blueColor),
-                    ),
-                  ],
-                ),
-                const Divider(
-                  color: Colors.grey,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Form(
-                    key: _formKey,
-                    child: Column(
-                      children: [
-                        OurTextFormField(label: 'Skills e.g if software provide languages', pasVisible: false, controller: _skillsEditingController, validatorText: 'Field required', regEx: '', regExValidatorText: '', keyboardType: TextInputType.text, iconData: Icons.ac_unit),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        OurTextFormField(label: 'Bio, What are you good at?', pasVisible: false, controller: _bioEditingController, validatorText: 'Field Required', regEx: '', regExValidatorText: '', keyboardType: TextInputType.text, iconData: Icons.person),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        OurTextFormField(label: 'Address', pasVisible: false, controller: _addressController, validatorText: 'Field Required', regEx: '', regExValidatorText: '', keyboardType: TextInputType.text, iconData: Icons.location_on),
-                        const SizedBox(
-                          height: 25,
-                        ),
-                      ],
-                    )),
-                Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () async {
-                        if (_formKey.currentState!.validate()) {
-                          setState(() {
-                            isLoading = true;
-                          });
-                          String UniqueFileName =
-                              DateTime.now().millisecond.toString();
-                          Reference referenceRoot =
-                              FirebaseStorage.instance.ref();
-                          Reference referenceDirImage =
-                              referenceRoot.child('images');
-                          Reference referenceImageToUpload =
-                              referenceDirImage.child(UniqueFileName);
-                          try {
-                            await referenceImageToUpload.putFile(_image!);
-                            String imageUrl =
-                                await referenceImageToUpload.getDownloadURL();
-                            loggedInUser.profilePictureUrl = imageUrl;
-                            loggedInUser.skills =
-                                _skillsEditingController.text;
-                            loggedInUser.bio =
-                                _bioEditingController.text;
-                            loggedInUser.address =
-                                _addressController.text;
-                            await FirebaseFirestore.instance
-                                .collection('users')
-                                .doc(user!.uid)
-                                .update(loggedInUser.toMap());
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const Home()));
+                      Positioned(
+                        bottom: -10,
+                        left: 80,
+                        child: IconButton(
+                            onPressed: _pickImage,
+                            icon: const CircleAvatar(
+                              radius: 20,
+                              backgroundColor: Colors.white,
+                              child: Icon(
+                                Icons.add_a_photo,
+                                color: Colors.black,
+                              ),
+                            )),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.person_2_outlined,
+                        color: Colors.white,
+                      ),
+                      const SizedBox(
+                        width: 3,
+                      ),
+                      Text(
+                        '${loggedInUser.userName}',
+                        style: const TextStyle(color: blueColor),
+                      ),
+                    ],
+                  ),
+                  const Divider(
+                    color: Colors.grey,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.phone_outlined,
+                        color: Colors.white,
+                      ),
+                      const SizedBox(
+                        width: 3,
+                      ),
+                      Text(
+                        '${loggedInUser.phoneNumber}',
+                        style: const TextStyle(color: blueColor),
+                      ),
+                    ],
+                  ),
+                  const Divider(
+                    color: Colors.grey,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          OurTextFormField(label: 'Skills e.g if software provide languages', pasVisible: false, controller: _skillsEditingController, validatorText: 'Field required', regEx: '', regExValidatorText: '', keyboardType: TextInputType.text, iconData: Icons.ac_unit),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          OurTextFormField(label: 'Bio, What are you good at?', pasVisible: false, controller: _bioEditingController, validatorText: 'Field Required', regEx: '', regExValidatorText: '', keyboardType: TextInputType.text, iconData: Icons.person),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          OurTextFormField(label: 'Address', pasVisible: false, controller: _addressController, validatorText: 'Field Required', regEx: '', regExValidatorText: '', keyboardType: TextInputType.text, iconData: Icons.location_on),
+                          const SizedBox(
+                            height: 25,
+                          ),
+                        ],
+                      )),
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            setState(() {
+                              isLoading = true;
+                            });
+                            String UniqueFileName =
+                                DateTime.now().millisecond.toString();
+                            Reference referenceRoot =
+                                FirebaseStorage.instance.ref();
+                            Reference referenceDirImage =
+                                referenceRoot.child('images');
+                            Reference referenceImageToUpload =
+                                referenceDirImage.child(UniqueFileName);
+                            try {
+                              await referenceImageToUpload.putFile(_image!);
+                              String imageUrl =
+                                  await referenceImageToUpload.getDownloadURL();
+                              loggedInUser.profilePictureUrl = imageUrl;
+                              loggedInUser.skills =
+                                  _skillsEditingController.text;
+                              loggedInUser.bio =
+                                  _bioEditingController.text;
+                              loggedInUser.address =
+                                  _addressController.text;
+                              await FirebaseFirestore.instance
+                                  .collection('users')
+                                  .doc(user!.uid)
+                                  .update(loggedInUser.toMap());
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Home()));
+                              Fluttertoast.showToast(
+                                msg:
+                                    'Profile photo and information updated successfully',
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                backgroundColor: Colors.green,
+                                timeInSecForIosWeb: 1,
+                                fontSize: 16,
+                              );
+                            } catch (err) {
+                              Fluttertoast.showToast(
+                                  msg:
+                                      'No image selected, please update your profile photo.');
+                            }
+                          } else {
                             Fluttertoast.showToast(
                               msg:
-                                  'Profile photo and information updated successfully',
+                                  'Unable to upload your data Please fill the required fields',
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.BOTTOM,
-                              backgroundColor: Colors.green,
+                              backgroundColor: Colors.red,
                               timeInSecForIosWeb: 1,
                               fontSize: 16,
                             );
-                          } catch (err) {
-                            Fluttertoast.showToast(
-                                msg:
-                                    'No image selected, please update your profile photo.');
+                            //Fluttertoast.showToast(msg: 'No image selected, please update your profile photo.');
                           }
-                        } else {
-                          Fluttertoast.showToast(
-                            msg:
-                                'Unable to upload your data Please fill the required fields',
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.BOTTOM,
-                            backgroundColor: Colors.red,
-                            timeInSecForIosWeb: 1,
-                            fontSize: 16,
-                          );
-                          //Fluttertoast.showToast(msg: 'No image selected, please update your profile photo.');
-                        }
-                        setState(() {
-                          isLoading = false;
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: blueColor,
+                          setState(() {
+                            isLoading = false;
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: blueColor,
+                        ),
+                        child: const Text(
+                          'SAVE',
+                          style: TextStyle(color: Colors.black),
+                        ),
                       ),
-                      child: const Text(
-                        'SAVE',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ),
-                    if (isLoading) const CircularProgressIndicator(),
-                  ],
-                )
-              ],
+                      if (isLoading) const CircularProgressIndicator(),
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
-        ),
-      );
-    }));
+        );
+      })),
+    );
   }
 }

@@ -44,86 +44,104 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      endDrawer: const CustomNavigationDraer(),
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text('Best Candidate'),
-        centerTitle: true,
-      ),
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: _widgetOptions,
-      ),
-      bottomNavigationBar: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.transparent,
-            width: 2.0,
-          ),
+    bool canPop = false;
+    return PopScope(
+       canPop: canPop,
+      onPopInvoked: (bool value) {
+        setState(() {
+          canPop= !value;
+        });
+
+        if (canPop) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Click once more to exit"),
+              duration: Duration(milliseconds: 1500),
+            ),
+          );
+        }
+      },
+      child: Scaffold(
+        endDrawer: const CustomNavigationDraer(),
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: const Text('Best Candidate'),
+          centerTitle: true,
         ),
-        child: ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
-          child: BottomNavigationBar(
-            currentIndex: _selectedIndex,
-            onTap: _onItemTapped,
-            type: BottomNavigationBarType.fixed,
-            selectedItemColor: Colors.white,
-            unselectedItemColor: Colors.white,
-            backgroundColor: primarycolor,
-            items: <BottomNavigationBarItem>[
-              const BottomNavigationBarItem(
-                icon: Icon(Icons.star),
-                label: 'Motivation',
-              ),
-              const BottomNavigationBarItem(
-                icon: Icon(Icons.work),
-                label: 'Build Portfolio',
-              ),
-              const BottomNavigationBarItem(
-                icon: Icon(Icons.description),
-                label: 'Build CV',
-              ),
-              BottomNavigationBarItem(
-                icon: Stack(
-                  children: [
-                    const Icon(Icons.shopping_cart),
-                    FutureBuilder<int>(
-                      future: getOrdersCount(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData && snapshot.data! > 0) {
-                          return Positioned(
-                            right: 0,
-                            child: Container(
-                              padding: const EdgeInsets.all(2),
-                              decoration: BoxDecoration(
-                                color: Colors.red,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              constraints: const BoxConstraints(
-                                minWidth: 16,
-                                minHeight: 16,
-                              ),
-                              child: Text(
-                                '${snapshot.data}',
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12,
+        body: IndexedStack(
+          index: _selectedIndex,
+          children: _widgetOptions,
+        ),
+        bottomNavigationBar: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.transparent,
+              width: 2.0,
+            ),
+          ),
+          child: ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            child: BottomNavigationBar(
+              currentIndex: _selectedIndex,
+              onTap: _onItemTapped,
+              type: BottomNavigationBarType.fixed,
+              selectedItemColor: Colors.white,
+              unselectedItemColor: Colors.white,
+              backgroundColor: primarycolor,
+              items: <BottomNavigationBarItem>[
+                const BottomNavigationBarItem(
+                  icon: Icon(Icons.star),
+                  label: 'Motivation',
+                ),
+                const BottomNavigationBarItem(
+                  icon: Icon(Icons.work),
+                  label: 'Build Portfolio',
+                ),
+                const BottomNavigationBarItem(
+                  icon: Icon(Icons.description),
+                  label: 'Build CV',
+                ),
+                BottomNavigationBarItem(
+                  icon: Stack(
+                    children: [
+                      const Icon(Icons.shopping_cart),
+                      FutureBuilder<int>(
+                        future: getOrdersCount(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData && snapshot.data! > 0) {
+                            return Positioned(
+                              right: 0,
+                              child: Container(
+                                padding: const EdgeInsets.all(2),
+                                decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                constraints: const BoxConstraints(
+                                  minWidth: 16,
+                                  minHeight: 16,
+                                ),
+                                child: Text(
+                                  '${snapshot.data}',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                  ),
                                 ),
                               ),
-                            ),
-                          );
-                        } else {
-                          return const SizedBox();
-                        }
-                      },
-                    ),
-                  ],
+                            );
+                          } else {
+                            return const SizedBox();
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                  label: 'Orders',
                 ),
-                label: 'Orders',
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

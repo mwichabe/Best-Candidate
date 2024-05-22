@@ -1,7 +1,9 @@
+import 'package:best_candidate/Dashboard/help/help.dart';
 import 'package:best_candidate/Dashboard/home.dart';
 import 'package:best_candidate/Dashboard/profile/profile.dart';
 import 'package:best_candidate/constance/constance.dart';
 import 'package:best_candidate/introduction/login/login.dart';
+import 'package:best_candidate/introduction/signUp/sign_up.dart';
 import 'package:best_candidate/widgets/full_photo.dart';
 import 'package:best_candidate/models/signUp.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -102,10 +104,10 @@ class _CustomNavigationDraerState extends State<CustomNavigationDraer> {
                 context,MaterialPageRoute(builder: (context)=>Profile())),
           ),
           ListTile(
-            leading: const Icon(Icons.people, color: Colors.white),
-            title: const Text('Friends', style: TextStyle(color: Colors.white)),
-            onTap: () => Navigator.pushReplacementNamed(
-                context,''),
+            leading: const Icon(Icons.help_center, color: Colors.white),
+            title: const Text('Help', style: TextStyle(color: Colors.white)),
+            onTap: () => Navigator.pushReplacement(
+                context,MaterialPageRoute(builder: (context)=>Help())),
           ),
           ListTile(
               leading: const Icon(Icons.logout, color: Colors.white),
@@ -141,7 +143,7 @@ class _CustomNavigationDraerState extends State<CustomNavigationDraer> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              const LogIn())));
+                                              const SignUp())));
                                 
                               // Navigate to the login screen
                             },

@@ -63,37 +63,22 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        final shouldPop = await showDialog<bool>(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                title: const Text('Do you want to exit this App?'),
-                actionsAlignment: MainAxisAlignment.spaceBetween,
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context, true);
-                    },
-                    child: const Text(
-                      'Yes',
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context, false);
-                    },
-                    child: const Text(
-                      'No',
-                      style: TextStyle(color: Colors.green),
-                    ),
-                  )
-                ],
-              );
-            });
-        return shouldPop!;
+     bool canPop = false;
+    return PopScope(
+       canPop: canPop,
+      onPopInvoked: (bool value) {
+        setState(() {
+          canPop= !value;
+        });
+
+        if (canPop) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Click once more to exit"),
+              duration: Duration(milliseconds: 1500),
+            ),
+          );
+        }
       },
       child: Scaffold(
           //backgroundColor: Colors.indigo,

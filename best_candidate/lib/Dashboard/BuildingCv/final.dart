@@ -67,20 +67,21 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text('Please add details for your resume to be generated'),
+                        const Text(
+                            'Please add details for your resume to be generated'),
                         TextButton(
-                          onPressed: () {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const Home()));
-                          },
-                          child: const Center(
-                            child: Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text('Home'),
-                            ),
-                          )),
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Home()));
+                            },
+                            child: const Center(
+                              child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text('Home'),
+                              ),
+                            )),
                       ],
                     ),
                   );
@@ -244,7 +245,9 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                                         ),
                                       ),
                                     ),
-                                    const SizedBox(width: 5,),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
                                     ElevatedButton(
                                         onPressed: () async {
                                           final Directory? directory;
@@ -260,12 +263,23 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                                                 pageFormat: PdfPageFormat.a4,
                                                 build: (pw.Context context) {
                                                   return pw.Container(
-                                                    color: PdfColor.fromInt(
-                                                        Colors.grey.value),
+                                                    decoration:
+                                                        pw.BoxDecoration(
+                                                            color: PdfColor
+                                                                .fromInt(Colors
+                                                                    .grey
+                                                                    .shade100
+                                                                    .value),
+                                                            border:
+                                                                pw.Border.all(
+                                                              color: PdfColor
+                                                                  .fromInt(Colors
+                                                                      .grey
+                                                                      .value),
+                                                            )),
                                                     child: pw.Padding(
-                                                      padding:
-                                                          const pw.EdgeInsets.all(
-                                                              8.0),
+                                                      padding: const pw
+                                                          .EdgeInsets.all(8.0),
                                                       child: pw.Column(
                                                         children: [
                                                           pw.Row(
@@ -274,18 +288,18 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                                                                 .spaceBetween,
                                                             children: [
                                                               // NetworkImage('${loggedInUser.profilePictureUrl}'),
-                                    
+
                                                               pw.Text(
                                                                 '${loggedInUser.firstName} \n ${loggedInUser.lastName}',
                                                                 style: pw.TextStyle(
-                                                                    color: PdfColor
-                                                                        .fromInt(Colors
-                                                                            .green
-                                                                            .value),
+                                                                    color: PdfColor.fromInt(Colors
+                                                                        .green
+                                                                        .value),
                                                                     fontWeight: pw
                                                                         .FontWeight
                                                                         .bold,
-                                                                    fontSize: 22,
+                                                                    fontSize:
+                                                                        22,
                                                                     letterSpacing:
                                                                         1.5),
                                                               ),
@@ -301,10 +315,9 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                                                                         fontWeight: pw
                                                                             .FontWeight
                                                                             .bold,
-                                                                        color: PdfColor
-                                                                            .fromInt(Colors
-                                                                                .blue
-                                                                                .value),
+                                                                        color: PdfColor.fromInt(Colors
+                                                                            .blue
+                                                                            .value),
                                                                         fontSize:
                                                                             12),
                                                                   ),
@@ -314,10 +327,9 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                                                                         fontWeight: pw
                                                                             .FontWeight
                                                                             .bold,
-                                                                        color: PdfColor
-                                                                            .fromInt(Colors
-                                                                                .blue
-                                                                                .value),
+                                                                        color: PdfColor.fromInt(Colors
+                                                                            .blue
+                                                                            .value),
                                                                         fontSize:
                                                                             12),
                                                                   ),
@@ -327,16 +339,18 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                                                                         fontWeight: pw
                                                                             .FontWeight
                                                                             .bold,
-                                                                        color: PdfColor
-                                                                            .fromInt(Colors
-                                                                                .blue
-                                                                                .value),
+                                                                        color: PdfColor.fromInt(Colors
+                                                                            .blue
+                                                                            .value),
                                                                         fontSize:
                                                                             12),
                                                                   )
                                                                 ],
                                                               )
                                                             ],
+                                                          ),
+                                                          pw.SizedBox(
+                                                            height: 20,
                                                           ),
                                                           pw.Padding(
                                                             padding: const pw
@@ -350,12 +364,24 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                                                               ),
                                                             ),
                                                           ),
+                                                          pw.SizedBox(
+                                                            height: 20,
+                                                          ),
                                                           pw.Padding(
                                                             padding: const pw
                                                                 .EdgeInsets.all(
                                                                 8.0),
                                                             child: pw.Text(
-                                                                '${loggedInUser.bio}'),
+                                                                '${loggedInUser.bio}',
+                                                                style: const pw
+                                                                    .TextStyle(
+                                                                  letterSpacing:
+                                                                      2.0,
+                                                                  fontSize: 16,
+                                                                )),
+                                                          ),
+                                                          pw.SizedBox(
+                                                            height: 20,
                                                           ),
                                                           pw.Row(
                                                             mainAxisAlignment: pw
@@ -369,19 +395,35 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                                                                         .fromInt(Colors
                                                                             .green
                                                                             .value),
-                                                                    fontSize: 18),
+                                                                    fontSize:
+                                                                        18),
                                                               )
                                                             ],
                                                           ),
+                                                          pw.SizedBox(
+                                                            height: 15,
+                                                          ),
                                                           pw.Divider(
-                                                            color: PdfColor.fromInt(
-                                                                Colors.green.value),
+                                                            color: PdfColor
+                                                                .fromInt(Colors
+                                                                    .green
+                                                                    .value),
                                                           ),
                                                           pw.Text(
-                                                              'Worked at $companyName, from $startEndDate, I was able to sharpen my skills in $skills. \n  The Working environment was favourable and had fair salary'),
+                                                              'Worked at $companyName, from $startEndDate, I was able to sharpen my skills in $skills. \n  The Working environment was favourable and had fair salary',
+                                                              style: const pw.TextStyle(
+                                                                  letterSpacing:
+                                                                      2.0,
+                                                                  fontSize:
+                                                                      15)),
                                                           pw.Divider(
-                                                            color: PdfColor.fromInt(
-                                                                Colors.green.value),
+                                                            color: PdfColor
+                                                                .fromInt(Colors
+                                                                    .green
+                                                                    .value),
+                                                          ),
+                                                          pw.SizedBox(
+                                                            height: 20,
                                                           ),
                                                           pw.Row(
                                                             mainAxisAlignment: pw
@@ -395,15 +437,19 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                                                                         .fromInt(Colors
                                                                             .green
                                                                             .value),
-                                                                    fontSize: 18),
+                                                                    fontSize:
+                                                                        18),
                                                               )
                                                             ],
                                                           ),
+                                                          pw.SizedBox(
+                                                            height: 20,
+                                                          ),
                                                           pw.Text(
                                                             'Got a $category from',
-                                                            style:
-                                                                const pw.TextStyle(
-                                                                    fontSize: 16),
+                                                            style: const pw
+                                                                .TextStyle(
+                                                                fontSize: 16),
                                                           ),
                                                           pw.Text(
                                                             institutionName,
@@ -414,8 +460,13 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                                                                     .bold),
                                                           ),
                                                           pw.Divider(
-                                                            color: PdfColor.fromInt(
-                                                                Colors.green.value),
+                                                            color: PdfColor
+                                                                .fromInt(Colors
+                                                                    .green
+                                                                    .value),
+                                                          ),
+                                                          pw.SizedBox(
+                                                            height: 20,
                                                           ),
                                                           pw.Row(
                                                             mainAxisAlignment: pw
@@ -429,17 +480,25 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                                                                         .fromInt(Colors
                                                                             .green
                                                                             .value),
-                                                                    fontSize: 18),
+                                                                    fontSize:
+                                                                        18),
                                                               )
                                                             ],
                                                           ),
-                                                          pw.Text(skills.toString())
+                                                          pw.Text(skills
+                                                              .toString()),
+                                                          pw.Image(
+                                                            image,
+                                                            width: 70,
+                                                            fit: pw
+                                                                .BoxFit.contain,
+                                                          ),
                                                         ],
                                                       ),
                                                     ),
                                                   );
                                                 }));
-                                    
+
                                             if (Platform.isIOS) {
                                               directory =
                                                   await getApplicationDocumentsDirectory();
@@ -447,7 +506,7 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                                               directory =
                                                   await getDownloadsDirectory();
                                             }
-                                    
+
                                             if (directory == null) {
                                               Fluttertoast.showToast(
                                                   msg:
@@ -456,7 +515,7 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                                             }
                                             String path = directory.path;
                                             String myFile =
-                                                '${path}/myresume-${loggedInUser.userName}.pdf';
+                                                '$path/myresume-${loggedInUser.userName}.pdf';
                                             final file = File(myFile);
                                             await file
                                                 .writeAsBytes(await doc.save());

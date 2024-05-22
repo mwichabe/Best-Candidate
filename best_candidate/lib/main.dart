@@ -1,16 +1,14 @@
 import 'package:best_candidate/Dashboard/home.dart';
-import 'package:best_candidate/constance/constance.dart';
 import 'package:best_candidate/firebase_options.dart';
 import 'package:best_candidate/introduction/splash/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:mpesa_flutter_plugin/initializer.dart';
 
 Future <void> main()async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-    MpesaFlutterPlugin.setConsumerKey(ConstanceData.consumerKey);
-  MpesaFlutterPlugin.setConsumerSecret(ConstanceData.consumerSecret);
+   // MpesaFlutterPlugin.setConsumerKey(ConstanceData.consumerKey);
+  //MpesaFlutterPlugin.setConsumerSecret(ConstanceData.consumerSecret);
   runApp(const MyApp());
 }
 

@@ -39,97 +39,115 @@ class _ResetPasswordState extends State<ResetPassword> {
             style: TextStyle(fontSize: 20),
           )),
     );
-    return Scaffold(
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            image: AssetImage(ConstanceData.splashBg),
+    bool canPop = false;
+    return PopScope(
+       canPop: canPop,
+      onPopInvoked: (bool value) {
+        setState(() {
+          canPop= !value;
+        });
+
+        if (canPop) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Click once more to exit"),
+              duration: Duration(milliseconds: 1500),
+            ),
+          );
+        }
+      },
+      child: Scaffold(
+        body: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: AssetImage(ConstanceData.splashBg),
+            ),
           ),
-        ),
-        child:  Center(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10)
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(36.0),
-                        child: Form(
-                            key: _formKey,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                const Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 25),
-                                  child: Text(
-                                      ' Enter your email and we will send you a password reset link'),
-                                ),
-                                const SizedBox(
-                                  height: 25,
-                                ),
-                                TextFormField(
-                                  autofocus: false,
-                                  controller: emailEditingController,
-                                  keyboardType: TextInputType.emailAddress,
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return ('Please enter your email');
-                                    }
-                                    //reg expression
-                                    if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)) {
-                                      return ("Please Enter a valid email");
-                                    }
-                                    return null;
-                                  },
-                                  onSaved: (value) {
-                                    emailEditingController.text = value!;
-                                  },
-                                  textInputAction: TextInputAction.done,
-                                  cursorColor: Colors.black,
-                                  decoration: InputDecoration(
-                                    prefix: const Icon(
-                                      Icons.email,
-                                      color: Colors.grey,
-                                    ),
-                                    contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-                                    hintText: "Enter email",
-                                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderSide:  const BorderSide(color: blueColor),
-                                        borderRadius: BorderRadius.circular(10)),
+          child:  Center(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10)
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(36.0),
+                          child: Form(
+                              key: _formKey,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  const Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 25),
+                                    child: Text(
+                                        ' Enter your email and we will send you a password reset link'),
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 25,
-                                ),
-                                resetButton,
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.grey,
-                                    ),
-                                    onPressed: () {
-                                      Navigator.pushReplacement(
-                                          context, MaterialPageRoute(builder: (context)=>LogIn()));
+                                  const SizedBox(
+                                    height: 25,
+                                  ),
+                                  TextFormField(
+                                    autofocus: false,
+                                    controller: emailEditingController,
+                                    keyboardType: TextInputType.emailAddress,
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return ('Please enter your email');
+                                      }
+                                      //reg expression
+                                      if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)) {
+                                        return ("Please Enter a valid email");
+                                      }
+                                      return null;
                                     },
-                                    child: const Text('SIGN IN PAGE',style: TextStyle(color: Colors.white),))
-                              ],
-                            )),
+                                    onSaved: (value) {
+                                      emailEditingController.text = value!;
+                                    },
+                                    textInputAction: TextInputAction.done,
+                                    cursorColor: Colors.black,
+                                    decoration: InputDecoration(
+                                      prefix: const Icon(
+                                        Icons.email,
+                                        color: Colors.grey,
+                                      ),
+                                      contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                                      hintText: "Enter email",
+                                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderSide:  const BorderSide(color: blueColor),
+                                          borderRadius: BorderRadius.circular(10)),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 25,
+                                  ),
+                                  resetButton,
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.grey,
+                                      ),
+                                      onPressed: () {
+                                        Navigator.pushReplacement(
+                                            context, MaterialPageRoute(builder: (context)=>LogIn()));
+                                      },
+                                      child: const Text('SIGN IN PAGE',style: TextStyle(color: Colors.white),))
+                                ],
+                              )),
+                        ),
                       ),
                     ),
                   ),
-                ),
-      )
-    ));
+        )
+      )),
+    );
     
   }
   passwordReset() {

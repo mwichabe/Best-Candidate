@@ -66,9 +66,12 @@ class _OrdersState extends State<Orders> {
                               border: Border.all(color: Colors.grey)),
                           child: Column(
                             children: [
-                              Text(
-                                'Hi $userNmae you have placed an order of developin an $orderType',
-                                style: const TextStyle(fontSize: 24),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Hi $userNmae you have placed an order of developin an $orderType',
+                                  style: const TextStyle(fontSize: 24),
+                                ),
                               ),
                               const Divider(
                                 height: 10,
@@ -80,7 +83,10 @@ class _OrdersState extends State<Orders> {
                                     color: blueColor,
                                     child: Padding(
                                       padding: EdgeInsets.all(8.0),
-                                      child: Text('Order Status'),
+                                      child: Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Text('Order Status'),
+                                      ),
                                     ),
                                   ),
                                   const SizedBox(
@@ -93,10 +99,13 @@ class _OrdersState extends State<Orders> {
                                         : Colors.green,
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        orderStatus,
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.bold),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          orderStatus,
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -110,7 +119,10 @@ class _OrdersState extends State<Orders> {
                                     color: blueColor,
                                     child: Padding(
                                       padding: EdgeInsets.all(8.0),
-                                      child: Text('Payment Status'),
+                                      child: Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Text('Payment Status'),
+                                      ),
                                     ),
                                   ),
                                   const SizedBox(
@@ -123,19 +135,25 @@ class _OrdersState extends State<Orders> {
                                         : Colors.green,
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        paymentStatus,
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.bold),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          paymentStatus,
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ],
                               ),
-                              const Text(
-                                'Order Informatin',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w700, fontSize: 18),
+                              const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Order Informatin',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w700, fontSize: 18),
+                                ),
                               ),
                               const Divider(),
                               Row(
@@ -143,34 +161,46 @@ class _OrdersState extends State<Orders> {
                                   Card(
                                       child: Column(
                                     children: [
-                                      const Text(
-                                        'Account Mail',
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w400),
+                                      const Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Text(
+                                          'Account Mail',
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w400),
+                                        ),
                                       ),
-                                      Text(
-                                        email,
-                                        style: const TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.normal),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          email,
+                                          style: const TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.normal),
+                                        ),
                                       ),
                                     ],
                                   )),
                                   Card(
                                       child: Column(
                                     children: [
-                                      const Text(
-                                        'Date of Creation ',
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w400),
+                                      const Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Text(
+                                          'Date of Creation ',
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w400),
+                                        ),
                                       ),
-                                      Text(
-                                        formattedDate,
-                                        style: const TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.normal),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          formattedDate,
+                                          style: const TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.normal),
+                                        ),
                                       ),
                                     ],
                                   )),
@@ -181,11 +211,14 @@ class _OrdersState extends State<Orders> {
                                 child: Card(
                                     child: Column(
                                   children: [
-                                    const Text(
-                                      'Order Budget',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w400),
+                                    const Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Text(
+                                        'Order Budget',
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w400),
+                                      ),
                                     ),
                                     Text(
                                       payment,
