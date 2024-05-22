@@ -83,6 +83,7 @@ class _ProfileState extends State<Profile> {
       child: Scaffold(
           //backgroundColor: Colors.indigo,
           appBar: AppBar(
+            scrolledUnderElevation: 0.0,
             automaticallyImplyLeading: false,
             elevation: 0.0,
             backgroundColor: blueColor,

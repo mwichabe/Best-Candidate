@@ -104,7 +104,7 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                         return Container(
                           color: Colors.grey.shade100,
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.fromLTRB(8.0,50.0,8.0,8.0),
                             child: Column(
                               children: [
                                 Row(
@@ -238,6 +238,27 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                                           padding: EdgeInsets.all(8.0),
                                           child: Text(
                                             'Delete',
+                                            style: TextStyle(
+                                                color: primarycolor,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                     const SizedBox(
+                                      width: 5,
+                                    ),
+                                    InkWell(
+                                      onTap: () => Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>Home())),
+                                      child: Container(
+                                        decoration: const BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10)),
+                                            color: Colors.green),
+                                        child: const Padding(
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Text(
+                                            'Home',
                                             style: TextStyle(
                                                 color: primarycolor,
                                                 fontWeight: FontWeight.bold),
@@ -485,8 +506,16 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                                                               )
                                                             ],
                                                           ),
-                                                          pw.Text(skills
-                                                              .toString()),
+                                                          pw.Container(
+                                                            width: 100,
+                                                            height: 70,
+                                                            decoration: pw.BoxDecoration(
+                                                              color: PdfColor.fromInt(Colors.blue.value)
+                                                            ),
+                                                            child: pw.Text(skills
+                                                              .toString(),style: pw.TextStyle(fontWeight: pw.FontWeight.bold,color: PdfColor.fromInt(Colors.white.value))),
+                                                          ),
+                                                              pw.SizedBox(height: 10),
                                                           pw.Image(
                                                             image,
                                                             width: 70,

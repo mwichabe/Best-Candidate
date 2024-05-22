@@ -10,11 +10,14 @@ class OurTextFormField extends StatelessWidget {
   final String regExValidatorText;
   final TextInputType keyboardType;
   final IconData iconData;
-  const OurTextFormField({super.key, required this.label, required this.pasVisible, required this.controller, required this.validatorText, required this.regEx, required this.regExValidatorText, required this.keyboardType, required this.iconData});
+  final bool isBio;
+  const OurTextFormField({super.key, required this.label, required this.pasVisible, required this.controller, required this.validatorText, required this.regEx, required this.regExValidatorText, required this.keyboardType, required this.iconData, required this.isBio});
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
+    return TextFormField( 
+      maxLength: isBio == true ? 5 : null,
+      minLines: isBio==true ? 2 : null,
       obscureText: pasVisible,
                         style:  const TextStyle(color: Colors.white),
                         keyboardType: keyboardType,

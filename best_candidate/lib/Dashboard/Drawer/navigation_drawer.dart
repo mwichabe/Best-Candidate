@@ -200,7 +200,7 @@ class _CustomNavigationDraerState extends State<CustomNavigationDraer> {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      const LogIn()))));
+                                                      const SignUp()))));
                               Navigator.of(context).pop();
                             },
                             child: const Text(

@@ -47,7 +47,7 @@ class _PortfolioState extends State<Portfolio> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
                Text(
-                'Hi ${loggedInUser.userName}, We can build you an online portfolio and host it: \nHere is a sample of Portfolio we can build for you.',
+                'Hi ${loggedInUser.userName}, We can build you an online portfolio and make it accessible to everyone. \nHere is a sample of Portfolio we can build for you.',
                 style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 20),

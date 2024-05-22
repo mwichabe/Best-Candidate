@@ -32,6 +32,7 @@ class _HelpState extends State<Help> {
       },
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
           actions: [IconButton(onPressed: (){
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Home()));

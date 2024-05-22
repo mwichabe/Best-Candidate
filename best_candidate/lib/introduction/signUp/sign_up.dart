@@ -44,7 +44,7 @@ class _SignUpState extends State<SignUp> {
         if (canPop) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text("Click once more to exit"),
+              content: Text("Cannot exit App"),
               duration: Duration(milliseconds: 1500),
             ),
           );
@@ -106,7 +106,7 @@ class _SignUpState extends State<SignUp> {
                                 regEx: "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]",
                                 regExValidatorText: 'Please enter a valid email',
                                 keyboardType: TextInputType.emailAddress,
-                                iconData: Icons.email),
+                                iconData: Icons.email, isBio: false,),
                             const SizedBox(
                               height: 20,
                             ),
@@ -118,7 +118,7 @@ class _SignUpState extends State<SignUp> {
                                 regEx: '',
                                 regExValidatorText: '',
                                 keyboardType: TextInputType.phone,
-                                iconData: Icons.phone),
+                                iconData: Icons.phone, isBio: false,),
                             const SizedBox(
                               height: 20,
                             ),
@@ -132,7 +132,7 @@ class _SignUpState extends State<SignUp> {
                               keyboardType: TextInputType.text,
                               iconData: Icons.person,
                               pasVisible: false,
-                              controller: _firstNameController,
+                              controller: _firstNameController, isBio: false,
                             ),
                             const SizedBox(
                               height: 20,
@@ -147,7 +147,7 @@ class _SignUpState extends State<SignUp> {
                               keyboardType: TextInputType.text,
                               iconData: Icons.person,
                               pasVisible: false,
-                              controller: _lastNameController,
+                              controller: _lastNameController, isBio: false,
                             ),
                             const SizedBox(
                               height: 20,
@@ -160,7 +160,7 @@ class _SignUpState extends State<SignUp> {
                               keyboardType: TextInputType.text,
                               iconData: Icons.person,
                               controller: _userNameController,
-                              pasVisible: false,
+                              pasVisible: false, isBio: false,
                             ),
                             const SizedBox(
                               height: 20,
@@ -179,7 +179,7 @@ class _SignUpState extends State<SignUp> {
                               keyboardType: TextInputType.text,
                               iconData: Icons.key,
                               controller: _passwordEditingController,
-                              pasVisible: true,
+                              pasVisible: true, isBio: false,
                             ),
                           ],
                         )),

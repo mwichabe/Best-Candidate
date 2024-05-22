@@ -1,5 +1,6 @@
 import 'package:best_candidate/constance/constance.dart';
 import 'package:best_candidate/introduction/login/login.dart';
+import 'package:best_candidate/providers/auth.dart';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
@@ -38,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(const Duration(seconds: 1));
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (context) => const LogIn(),
+        builder: (context) => const AuthPage(),
       ),
     );
   }

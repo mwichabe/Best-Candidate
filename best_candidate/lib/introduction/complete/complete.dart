@@ -223,15 +223,15 @@ class _CompleteSetupState extends State<CompleteSetup> {
                       key: _formKey,
                       child: Column(
                         children: [
-                          OurTextFormField(label: 'Skills e.g if software provide languages', pasVisible: false, controller: _skillsEditingController, validatorText: 'Field required', regEx: '', regExValidatorText: '', keyboardType: TextInputType.text, iconData: Icons.ac_unit),
+                          OurTextFormField(label: 'Skills e.g if software provide languages', pasVisible: false, controller: _skillsEditingController, validatorText: 'Field required', regEx: '', regExValidatorText: '', keyboardType: TextInputType.text, iconData: Icons.ac_unit, isBio: false,),
                           const SizedBox(
                             height: 10,
                           ),
-                          OurTextFormField(label: 'Bio, What are you good at?', pasVisible: false, controller: _bioEditingController, validatorText: 'Field Required', regEx: '', regExValidatorText: '', keyboardType: TextInputType.text, iconData: Icons.person),
+                          OurTextFormField(label: 'Bio, What are you good at? It will be on your CV Market Yourself', pasVisible: false, controller: _bioEditingController, validatorText: 'Field Required', regEx: '', regExValidatorText: '', keyboardType: TextInputType.text, iconData: Icons.person, isBio: true,),
                           const SizedBox(
                             height: 10,
                           ),
-                          OurTextFormField(label: 'Address', pasVisible: false, controller: _addressController, validatorText: 'Field Required', regEx: '', regExValidatorText: '', keyboardType: TextInputType.text, iconData: Icons.location_on),
+                          OurTextFormField(label: 'Address', pasVisible: false, controller: _addressController, validatorText: 'Field Required', regEx: '', regExValidatorText: '', keyboardType: TextInputType.text, iconData: Icons.location_on, isBio: false,),
                           const SizedBox(
                             height: 25,
                           ),

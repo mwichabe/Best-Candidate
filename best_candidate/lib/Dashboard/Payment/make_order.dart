@@ -15,17 +15,15 @@ class _MakeOrderState extends State<MakeOrder> {
   final _currentUser = FirebaseAuth.instance.currentUser;
   final _ordersCollection = FirebaseFirestore.instance.collection('users');
   final String _orderTupe = 'Online Portfolio';
-  final String budget = '\$150';
+  final String budget = '\$70';
   final String status = 'Reviewing';
   final String payment = 'Incomplete';
   bool _uploading = false;
   //get user info
-  
-
 
   Future<void> _createOrder() async {
     try {
-       setState(() {
+      setState(() {
         _uploading = true;
       });
       final userData = await _ordersCollection.doc(_currentUser!.uid).get();
@@ -36,7 +34,7 @@ class _MakeOrderState extends State<MakeOrder> {
         'userName': userName,
         'email': email,
         'createdAt': Timestamp.now(),
-        'Order Type':_orderTupe,
+        'Order Type': _orderTupe,
         'budget': budget,
         'status': status,
         'payment': payment
@@ -58,6 +56,10 @@ class _MakeOrderState extends State<MakeOrder> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+        backgroundColor: Colors.transparent,
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -88,11 +90,18 @@ class _MakeOrderState extends State<MakeOrder> {
                         ),
                         TextButton(
                           onPressed: () async {
+                            setState(() {
+                              _uploading = true;
+                            });
+
                             await _createOrder();
+                            setState(() {
+                              _uploading = false;
+                            });
                           },
-                          child: const Text(
-                            'Yes',
-                            style: TextStyle(
+                          child: Text(
+                            _uploading == true ? 'Loading...' : 'Yes',
+                            style: const TextStyle(
                               color: Colors.green,
                               fontSize: 16.0,
                             ),
