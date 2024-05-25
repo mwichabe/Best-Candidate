@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 
-
 class CompleteSetup extends StatefulWidget {
   const CompleteSetup({super.key});
 
@@ -56,7 +55,8 @@ class _CompleteSetupState extends State<CompleteSetup> {
   }
 
   //controllers
-  final TextEditingController _skillsEditingController = TextEditingController();
+  final TextEditingController _skillsEditingController =
+      TextEditingController();
   final TextEditingController _bioEditingController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
 
@@ -64,10 +64,10 @@ class _CompleteSetupState extends State<CompleteSetup> {
   Widget build(BuildContext context) {
     bool canPop = false;
     return PopScope(
-       canPop: canPop,
+      canPop: canPop,
       onPopInvoked: (bool value) {
         setState(() {
-          canPop= !value;
+          canPop = !value;
         });
 
         if (canPop) {
@@ -147,8 +147,7 @@ class _CompleteSetupState extends State<CompleteSetup> {
                                       width: 180,
                                     )
                                   : Image.network(
-                                      loggedInUser.profilePictureUrl ??
-                                          '',
+                                      loggedInUser.profilePictureUrl ?? '',
                                       fit: BoxFit.cover,
                                       width: 140,
                                       height: 140,
@@ -223,15 +222,46 @@ class _CompleteSetupState extends State<CompleteSetup> {
                       key: _formKey,
                       child: Column(
                         children: [
-                          OurTextFormField(label: 'Skills e.g if software provide languages', pasVisible: false, controller: _skillsEditingController, validatorText: 'Field required', regEx: '', regExValidatorText: '', keyboardType: TextInputType.text, iconData: Icons.ac_unit, isBio: false,),
+                          OurTextFormField(
+                            label: 'Skills e.g if software provide languages',
+                            pasVisible: false,
+                            controller: _skillsEditingController,
+                            validatorText: 'Field required',
+                            regEx: '',
+                            regExValidatorText: '',
+                            keyboardType: TextInputType.text,
+                            iconData: Icons.ac_unit,
+                            isBio: false,
+                          ),
                           const SizedBox(
                             height: 10,
                           ),
-                          OurTextFormField(label: 'Bio, What are you good at? It will be on your CV Market Yourself', pasVisible: false, controller: _bioEditingController, validatorText: 'Field Required', regEx: '', regExValidatorText: '', keyboardType: TextInputType.text, iconData: Icons.person, isBio: true,),
+                          OurTextFormField(
+                            label:
+                                'Bio, What are you good at? It will be on your CV Market Yourself',
+                            pasVisible: false,
+                            controller: _bioEditingController,
+                            validatorText: 'Field Required',
+                            regEx: r'.{150,}',
+                            regExValidatorText: 'Please enter at least 150 characters',
+                            keyboardType: TextInputType.multiline,
+                            iconData: Icons.person,
+                            isBio: true,
+                          ),
                           const SizedBox(
                             height: 10,
                           ),
-                          OurTextFormField(label: 'Address', pasVisible: false, controller: _addressController, validatorText: 'Field Required', regEx: '', regExValidatorText: '', keyboardType: TextInputType.text, iconData: Icons.location_on, isBio: false,),
+                          OurTextFormField(
+                            label: 'Address',
+                            pasVisible: false,
+                            controller: _addressController,
+                            validatorText: 'Field Required',
+                            regEx: '',
+                            regExValidatorText: '',
+                            keyboardType: TextInputType.text,
+                            iconData: Icons.location_on,
+                            isBio: false,
+                          ),
                           const SizedBox(
                             height: 25,
                           ),
@@ -261,10 +291,8 @@ class _CompleteSetupState extends State<CompleteSetup> {
                               loggedInUser.profilePictureUrl = imageUrl;
                               loggedInUser.skills =
                                   _skillsEditingController.text;
-                              loggedInUser.bio =
-                                  _bioEditingController.text;
-                              loggedInUser.address =
-                                  _addressController.text;
+                              loggedInUser.bio = _bioEditingController.text;
+                              loggedInUser.address = _addressController.text;
                               await FirebaseFirestore.instance
                                   .collection('users')
                                   .doc(user!.uid)

@@ -63,12 +63,12 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-     bool canPop = false;
+    bool canPop = false;
     return PopScope(
-       canPop: canPop,
+      canPop: canPop,
       onPopInvoked: (bool value) {
         setState(() {
-          canPop= !value;
+          canPop = !value;
         });
 
         if (canPop) {
@@ -94,8 +94,8 @@ class _ProfileState extends State<Profile> {
                   color: Colors.white,
                 ),
                 onPressed: () {
-                  Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (context) => const Home()));
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => const Home()));
                 },
               ),
             ],
@@ -302,11 +302,17 @@ class _ProfileState extends State<Profile> {
                               ),
                               // bio
                               TextFormField(
+                                maxLength: 150,
+                                minLines: 2,
+                                maxLines: null,
                                 autovalidateMode:
                                     AutovalidateMode.onUserInteraction,
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'Update your Bio';
+                                  }
+                                  if (!RegExp(r'.{150,}').hasMatch(value)) {
+                                    return ('Please enter at least 150 characters');
                                   }
                                   return null;
                                 },
@@ -323,8 +329,7 @@ class _ProfileState extends State<Profile> {
                                         borderRadius: BorderRadius.circular(10),
                                         borderSide: const BorderSide(
                                             color: Colors.grey)),
-                                    hintText:
-                                        'Update your bio',
+                                    hintText: 'Update your bio',
                                     prefixIcon: const Icon(
                                       Icons.app_registration_rounded,
                                       color: Colors.white,
@@ -336,7 +341,6 @@ class _ProfileState extends State<Profile> {
                               ),
                             ],
                           )),
-                      
                       Stack(
                         alignment: Alignment.center,
                         children: [
@@ -364,10 +368,10 @@ class _ProfileState extends State<Profile> {
                                       .collection('users')
                                       .doc(user!.uid)
                                       .update({
-                                    'firstName': firstNameEditingController.text,
+                                    'firstName':
+                                        firstNameEditingController.text,
                                     'phoneNumber': phoneEditingController.text,
-                                    'lastName':
-                                        lastNameEditingController.text,
+                                    'lastName': lastNameEditingController.text,
                                     'bio': bioEditingController.text,
                                     'profilePictureUrl': imageUrl,
                                   });
@@ -378,9 +382,10 @@ class _ProfileState extends State<Profile> {
                                     backgroundColor: Colors.green,
                                     timeInSecForIosWeb: 1,
                                     fontSize: 16,
-                                  ).then((value) =>
-                                      Navigator.pushReplacement(
-                                          context, MaterialPageRoute(builder: (context)=>Home())));
+                                  ).then((value) => Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Home())));
                                 } catch (err) {
                                   print('Firebase Firestore error: $err');
                                   Fluttertoast.showToast(

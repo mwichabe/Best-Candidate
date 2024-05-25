@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Orders extends StatefulWidget {
   const Orders({super.key});
@@ -69,7 +70,7 @@ class _OrdersState extends State<Orders> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  'Hi $userNmae you have placed an order of developin an $orderType',
+                                  'Hi $userNmae you have placed an order of developing an $orderType',
                                   style: const TextStyle(fontSize: 24),
                                 ),
                               ),
@@ -152,7 +153,8 @@ class _OrdersState extends State<Orders> {
                                 child: Text(
                                   'Order Informatin',
                                   style: TextStyle(
-                                      fontWeight: FontWeight.w700, fontSize: 18),
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 18),
                                 ),
                               ),
                               const Divider(),
@@ -206,28 +208,56 @@ class _OrdersState extends State<Orders> {
                                   )),
                                 ],
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Card(
-                                    child: Column(
-                                  children: [
-                                    const Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: Text(
-                                        'Order Budget',
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w400),
-                                      ),
+                              Row(
+                                children: [
+                                  const Spacer(),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Card(
+                                        child: Column(
+                                      children: [
+                                        const Padding(
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Text(
+                                            'Order Budget',
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                        ),
+                                        Text(
+                                          payment,
+                                          style: const TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.normal),
+                                        ),
+                                      ],
+                                    )),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        launchUrl(
+                                          Uri.parse(
+                                            'whatsapp://send?phone=+254704858069+&text=Hello Collins, I have placed an order,'
+                                            ', I am in need of an online portfolio',
+                                          ),
+                                        );
+                                      },
+                                      child: const Card(
+                                          child: Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Text(
+                                          'Reach Out',
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                      )),
                                     ),
-                                    Text(
-                                      payment,
-                                      style: const TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.normal),
-                                    ),
-                                  ],
-                                )),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
