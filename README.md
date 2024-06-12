@@ -20,6 +20,6 @@ BuildCV
     This feature enables users to add their details and generate their CV thereafter download it.
 
 # Backend Technology
-I used firebase to build the backend of this application. Authentication and the cloud 
+I used firebase to build the backend of this application. Authentication and the cloud firestore
 
 
