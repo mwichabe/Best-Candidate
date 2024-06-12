@@ -5,8 +5,10 @@ import 'package:best_candidate/Dashboard/Portfolio/portfolio.dart';
 import 'package:best_candidate/Dashboard/dashboard/dashboard.dart';
 import 'package:best_candidate/constance/constance.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -16,6 +18,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  var _connectionStatus;
   int _selectedIndex = 0;
   static final List<Widget> _widgetOptions = <Widget>[
     // pages
@@ -24,7 +27,27 @@ class _HomeState extends State<Home> {
     const BuildingCv(),
     const Orders(),
   ];
-
+  @override
+  void initState() {
+    // TODO: implement initState
+     checkInternetConnectivity();
+    super.initState();
+  }
+  checkInternetConnectivity() {
+   if (_connectionStatus == ConnectivityResult.none) {
+      return 
+ 
+      Fluttertoast.showToast(
+         msg: "Check your internet connection",
+           toastLength: Toast.LENGTH_LONG,
+           gravity: ToastGravity.TOP,
+          timeInSecForIosWeb: 10,
+           backgroundColor: Colors.red,
+          textColor: Colors.white,
+           fontSize: 16.0
+       );
+     }
+  }
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -55,7 +78,7 @@ class _HomeState extends State<Home> {
         if (canPop) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text("Click once more to exit"),
+              content: Text(""),
               duration: Duration(milliseconds: 1500),
             ),
           );

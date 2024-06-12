@@ -51,19 +51,19 @@ class _SignUpState extends State<SignUp> {
         }
       },
       child: Scaffold(
-        body: SingleChildScrollView(
-          child: Material(
-            child: Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage(ConstanceData.splashBg),
-                ),
+        body: Material(
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage(ConstanceData.splashBg),
               ),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 28.0, right: 28.0),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 28.0, right: 28.0),
+              child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

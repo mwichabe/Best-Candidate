@@ -63,6 +63,7 @@ class ConstanceData {
   static String logo = bseImageUrl + "Best_candidate.png";
   static String success = bseImageUrl + "success.jpg";
   static String cartEmpty = bseImageUrl + "cart_empty.png";
+  static String internet = bseImageUrl + "internet.jpg";
 
 
   ////////////////////////////////////////////

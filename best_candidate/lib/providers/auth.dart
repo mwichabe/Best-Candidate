@@ -2,6 +2,7 @@ import 'package:best_candidate/Dashboard/home.dart';
 import 'package:best_candidate/constance/constance.dart';
 import 'package:best_candidate/introduction/complete/complete.dart';
 import 'package:best_candidate/introduction/login/login.dart';
+import 'package:best_candidate/widgets/internet.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +53,7 @@ class AuthPage extends StatelessWidget {
                   }
                 } else {
                   // Error occurred while fetching user data
-                  return const Text('Error occurred');
+                  return const Internet();
                 }
               },
             );

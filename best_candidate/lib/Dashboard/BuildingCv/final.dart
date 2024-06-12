@@ -249,7 +249,7 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                                       width: 5,
                                     ),
                                     InkWell(
-                                      onTap: () => Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>Home())),
+                                      onTap: () => Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>const Home())),
                                       child: Container(
                                         decoration: const BoxDecoration(
                                             borderRadius: BorderRadius.all(
@@ -507,10 +507,11 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                                                             ],
                                                           ),
                                                           pw.Container(
-                                                            width: 100,
+                                                            width: double.infinity,
                                                             height: 70,
                                                             decoration: pw.BoxDecoration(
-                                                              color: PdfColor.fromInt(Colors.blue.value)
+                                                              color: PdfColor.fromInt(Colors.blue.value),
+                                                              borderRadius: const pw.BorderRadius.all(pw.Radius.circular(10))
                                                             ),
                                                             child: pw.Text(skills
                                                               .toString(),style: pw.TextStyle(fontWeight: pw.FontWeight.bold,color: PdfColor.fromInt(Colors.white.value))),

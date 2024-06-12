@@ -29,7 +29,7 @@ class OurTextFormField extends StatelessWidget {
       child: Column(
         children: [
           TextFormField(
-            maxLength: isBio == true ? 300 : null,
+            maxLength: isBio == true ? 150 : null,
             minLines: isBio == true ? 2 : null,
             maxLines: isBio == true ? null : 1,
             obscureText: pasVisible,
@@ -42,7 +42,7 @@ class OurTextFormField extends StatelessWidget {
               if (value!.isEmpty) {
                 return (validatorText);
               }
-              //regEx for email
+              //regEx
               if (!RegExp(regEx).hasMatch(value)) {
                 return (regExValidatorText);
               }
