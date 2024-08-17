@@ -1,3 +1,4 @@
+import 'package:best_candidate/Dashboard/BuildingCv/cvGenerator.dart';
 import 'package:best_candidate/Dashboard/home.dart';
 import 'package:best_candidate/constance/constance.dart';
 import 'package:best_candidate/models/signUp.dart';
@@ -104,7 +105,8 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                         return Container(
                           color: Colors.grey.shade100,
                           child: Padding(
-                            padding: const EdgeInsets.fromLTRB(8.0,50.0,8.0,8.0),
+                            padding:
+                                const EdgeInsets.fromLTRB(8.0, 50.0, 8.0, 8.0),
                             child: Column(
                               children: [
                                 Row(
@@ -245,11 +247,15 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                                         ),
                                       ),
                                     ),
-                                     const SizedBox(
+                                    const SizedBox(
                                       width: 5,
                                     ),
                                     InkWell(
-                                      onTap: () => Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>const Home())),
+                                      onTap: () => Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const Home())),
                                       child: Container(
                                         decoration: const BoxDecoration(
                                             borderRadius: BorderRadius.all(
@@ -432,7 +438,8 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                                                           ),
                                                           pw.Text(
                                                               'Worked at $companyName, from $startEndDate, I was able to sharpen my skills in $skills. \n  The Working environment was favourable and had fair salary',
-                                                              style: const pw.TextStyle(
+                                                              style: const pw
+                                                                  .TextStyle(
                                                                   letterSpacing:
                                                                       2.0,
                                                                   fontSize:
@@ -507,16 +514,33 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                                                             ],
                                                           ),
                                                           pw.Container(
-                                                            width: double.infinity,
+                                                            width:
+                                                                double.infinity,
                                                             height: 70,
                                                             decoration: pw.BoxDecoration(
-                                                              color: PdfColor.fromInt(Colors.blue.value),
-                                                              borderRadius: const pw.BorderRadius.all(pw.Radius.circular(10))
-                                                            ),
-                                                            child: pw.Text(skills
-                                                              .toString(),style: pw.TextStyle(fontWeight: pw.FontWeight.bold,color: PdfColor.fromInt(Colors.white.value))),
+                                                                color: PdfColor
+                                                                    .fromInt(Colors
+                                                                        .blue
+                                                                        .value),
+                                                                borderRadius: const pw
+                                                                    .BorderRadius.all(
+                                                                    pw.Radius
+                                                                        .circular(
+                                                                            10))),
+                                                            child: pw.Text(
+                                                                skills
+                                                                    .toString(),
+                                                                style: pw.TextStyle(
+                                                                    fontWeight: pw
+                                                                        .FontWeight
+                                                                        .bold,
+                                                                    color: PdfColor
+                                                                        .fromInt(Colors
+                                                                            .white
+                                                                            .value))),
                                                           ),
-                                                              pw.SizedBox(height: 10),
+                                                          pw.SizedBox(
+                                                              height: 10),
                                                           pw.Image(
                                                             image,
                                                             width: 70,
@@ -573,20 +597,50 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
           ))
         : Scaffold(
             body: Center(
-                child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text("This Feature will be updates soon"),
-                ElevatedButton(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("Generating CV using Gemini AI..."),
+                  ElevatedButton(
+                    onPressed: () async {
+                      final cvGenerator = CVGenerator();
+                      final cv = await cvGenerator.generateCV(
+                        '${loggedInUser.firstName} ${loggedInUser.lastName}',
+                        loggedInUser.email ?? '',
+                        loggedInUser.phoneNumber ?? '',
+                        loggedInUser.bio ?? '',
+                        'Bachelor of Science in Computer Science',
+                        '5 years of experience in software development',
+                      );
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Scaffold(
+                            appBar: AppBar(
+                              title: const Text('Generated CV'),
+                            ),
+                            body: Padding(
+                              padding: const EdgeInsets.all(18.0),
+                              child: Text(cv),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                    child: const Text('Generate CV'),
+                  ),
+                  ElevatedButton(
                     onPressed: () {
                       Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Home()));
+                        context,
+                        MaterialPageRoute(builder: (context) => const Home()),
+                      );
                     },
-                    child: const Text('Home'))
-              ],
-            )),
+                    child: const Text('Home'),
+                  ),
+                ],
+              ),
+            ),
           );
   }
 
