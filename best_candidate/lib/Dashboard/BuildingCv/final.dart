@@ -1,4 +1,3 @@
-import 'package:best_candidate/Dashboard/BuildingCv/cvGenerator.dart';
 import 'package:best_candidate/Dashboard/BuildingCv/premium_templates.dart';
 import 'package:best_candidate/Dashboard/home.dart';
 import 'package:best_candidate/constance/constance.dart';
