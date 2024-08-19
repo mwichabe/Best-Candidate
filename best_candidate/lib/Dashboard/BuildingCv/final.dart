@@ -1,4 +1,5 @@
 import 'package:best_candidate/Dashboard/BuildingCv/cvGenerator.dart';
+import 'package:best_candidate/Dashboard/BuildingCv/premium_templates.dart';
 import 'package:best_candidate/Dashboard/home.dart';
 import 'package:best_candidate/constance/constance.dart';
 import 'package:best_candidate/models/signUp.dart';
@@ -596,47 +597,62 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
             },
           ))
         : Scaffold(
-            body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("Generating CV using Gemini AI..."),
-                  ElevatedButton(
-                    onPressed: () async {
-                      final cvGenerator = CVGenerator();
-                      final cv = await cvGenerator.generateCV(
-                        '${loggedInUser.firstName} ${loggedInUser.lastName}',
-                        loggedInUser.email ?? '',
-                        loggedInUser.phoneNumber ?? '',
-                        loggedInUser.bio ?? '',
-                        'Bachelor of Science in Computer Science',
-                        '5 years of experience in software development',
-                      );
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Scaffold(
-                            appBar: AppBar(
-                              title: const Text('Generated CV'),
-                            ),
-                            body: Padding(
-                              padding: const EdgeInsets.all(18.0),
-                              child: Text(cv),
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                    child: const Text('Generate CV'),
-                  ),
-                  ElevatedButton(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              title: Text("Scroll to view samples"),
+              elevation: 1,
+              actions: [
+                IconButton(
                     onPressed: () {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) => const Home()),
                       );
                     },
-                    child: const Text('Home'),
+                    icon: Container(
+                        color: primarycolor,
+                        child: Padding(
+                          padding: const EdgeInsets.all(3.0),
+                          child: Icon(
+                            Icons.home,
+                            color: Colors.white,
+                          ),
+                        )))
+              ],
+            ),
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Card(
+                    elevation: 4.0,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            PremiumTemplate(
+                                path: ConstanceData.sample0, number: "1"),
+                            SizedBox(
+                              width: 7,
+                            ),
+                            PremiumTemplate(
+                                path: ConstanceData.sample1, number: "2"),
+                            SizedBox(
+                              width: 7,
+                            ),
+                            PremiumTemplate(
+                                path: ConstanceData.sample2, number: "3"),
+                            SizedBox(
+                              width: 7,
+                            ),
+                            PremiumTemplate(
+                                path: ConstanceData.sample3, number: "4"),
+                            SizedBox(
+                              width: 7,
+                            ),
+                          ]),
+                    ),
                   ),
                 ],
               ),
