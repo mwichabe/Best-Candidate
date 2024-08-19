@@ -242,8 +242,9 @@ class _CompleteSetupState extends State<CompleteSetup> {
                             pasVisible: false,
                             controller: _bioEditingController,
                             validatorText: 'Field Required',
-                            regEx: r'.{150,}',
-                            regExValidatorText: 'Please enter at least 150 characters',
+                            regEx: r'^.{20,}$',
+                            regExValidatorText:
+                                'Please enter at least 20 characters',
                             keyboardType: TextInputType.multiline,
                             iconData: Icons.person,
                             isBio: true,

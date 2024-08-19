@@ -1,3 +1,4 @@
+import 'package:best_candidate/Dashboard/BuildingCv/final.dart';
 import 'package:best_candidate/Dashboard/BuildingCv/resume.dart';
 import 'package:flutter/material.dart';
 
@@ -52,7 +53,19 @@ class _PlanSelectionDialogState extends State<PlanSelectionDialog> {
         ElevatedButton(
           onPressed: () {
             print('Selected plan: $_selectedPlan');
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: ((context) => Resume(selectedPlan: _selectedPlan,))));
+            _selectedPlan == "Free"
+                ? Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: ((context) => Resume(
+                              selectedPlan: _selectedPlan,
+                            ))))
+                : Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: ((context) => Final(
+                              selectedPlan: _selectedPlan,
+                            ))));
           },
           child: const Text('Select'),
         ),

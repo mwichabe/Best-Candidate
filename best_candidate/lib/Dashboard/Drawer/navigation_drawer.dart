@@ -2,7 +2,6 @@ import 'package:best_candidate/Dashboard/help/help.dart';
 import 'package:best_candidate/Dashboard/home.dart';
 import 'package:best_candidate/Dashboard/profile/profile.dart';
 import 'package:best_candidate/constance/constance.dart';
-import 'package:best_candidate/introduction/login/login.dart';
 import 'package:best_candidate/introduction/signUp/sign_up.dart';
 import 'package:best_candidate/widgets/full_photo.dart';
 import 'package:best_candidate/models/signUp.dart';
@@ -20,7 +19,7 @@ class CustomNavigationDraer extends StatefulWidget {
 }
 
 class _CustomNavigationDraerState extends State<CustomNavigationDraer> {
- User? user = FirebaseAuth.instance.currentUser;
+  User? user = FirebaseAuth.instance.currentUser;
 
   UserModelOne loggedInUser = UserModelOne(uid: '');
 
@@ -41,13 +40,13 @@ class _CustomNavigationDraerState extends State<CustomNavigationDraer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Colors.black,
+      backgroundColor: primarycolor,
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
               decoration: const BoxDecoration(
-                color: Colors.black,
+                color: primarycolor,
               ),
               accountName: Text('${loggedInUser.userName}',
                   style: const TextStyle(color: Colors.white)),
@@ -62,9 +61,8 @@ class _CustomNavigationDraerState extends State<CustomNavigationDraer> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>  FullPhotoPage(
-                                  url:
-                                      loggedInUser.profilePictureUrl ?? '')));
+                              builder: (context) => FullPhotoPage(
+                                  url: loggedInUser.profilePictureUrl ?? '')));
                     },
                     child: CachedNetworkImage(
                       imageUrl: loggedInUser.profilePictureUrl ?? '',
@@ -101,13 +99,13 @@ class _CustomNavigationDraerState extends State<CustomNavigationDraer> {
             ),
             title: const Text('Profile', style: TextStyle(color: Colors.white)),
             onTap: () => Navigator.pushReplacement(
-                context,MaterialPageRoute(builder: (context)=>Profile())),
+                context, MaterialPageRoute(builder: (context) => Profile())),
           ),
           ListTile(
             leading: const Icon(Icons.help_center, color: Colors.white),
             title: const Text('Help', style: TextStyle(color: Colors.white)),
             onTap: () => Navigator.pushReplacement(
-                context,MaterialPageRoute(builder: (context)=>Help())),
+                context, MaterialPageRoute(builder: (context) => Help())),
           ),
           ListTile(
               leading: const Icon(Icons.logout, color: Colors.white),
@@ -139,12 +137,13 @@ class _CustomNavigationDraerState extends State<CustomNavigationDraer> {
                           TextButton(
                             onPressed: () async {
                               // Sign out from FirebaseAuth
-                              await FirebaseAuth.instance.signOut().then((value) =>  Navigator.pushReplacement(
+                              await FirebaseAuth.instance.signOut().then(
+                                  (value) => Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
                                               const SignUp())));
-                                
+
                               // Navigate to the login screen
                             },
                             child: const Text(

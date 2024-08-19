@@ -1,3 +1,5 @@
+import 'package:best_candidate/Dashboard/BuildingCv/cvGenerator.dart';
+import 'package:best_candidate/Dashboard/BuildingCv/premium_templates.dart';
 import 'package:best_candidate/Dashboard/home.dart';
 import 'package:best_candidate/constance/constance.dart';
 import 'package:best_candidate/models/signUp.dart';
@@ -104,7 +106,8 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                         return Container(
                           color: Colors.grey.shade100,
                           child: Padding(
-                            padding: const EdgeInsets.fromLTRB(8.0,50.0,8.0,8.0),
+                            padding:
+                                const EdgeInsets.fromLTRB(8.0, 50.0, 8.0, 8.0),
                             child: Column(
                               children: [
                                 Row(
@@ -245,11 +248,15 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                                         ),
                                       ),
                                     ),
-                                     const SizedBox(
+                                    const SizedBox(
                                       width: 5,
                                     ),
                                     InkWell(
-                                      onTap: () => Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>const Home())),
+                                      onTap: () => Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const Home())),
                                       child: Container(
                                         decoration: const BoxDecoration(
                                             borderRadius: BorderRadius.all(
@@ -432,7 +439,8 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                                                           ),
                                                           pw.Text(
                                                               'Worked at $companyName, from $startEndDate, I was able to sharpen my skills in $skills. \n  The Working environment was favourable and had fair salary',
-                                                              style: const pw.TextStyle(
+                                                              style: const pw
+                                                                  .TextStyle(
                                                                   letterSpacing:
                                                                       2.0,
                                                                   fontSize:
@@ -507,16 +515,33 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
                                                             ],
                                                           ),
                                                           pw.Container(
-                                                            width: double.infinity,
+                                                            width:
+                                                                double.infinity,
                                                             height: 70,
                                                             decoration: pw.BoxDecoration(
-                                                              color: PdfColor.fromInt(Colors.blue.value),
-                                                              borderRadius: const pw.BorderRadius.all(pw.Radius.circular(10))
-                                                            ),
-                                                            child: pw.Text(skills
-                                                              .toString(),style: pw.TextStyle(fontWeight: pw.FontWeight.bold,color: PdfColor.fromInt(Colors.white.value))),
+                                                                color: PdfColor
+                                                                    .fromInt(Colors
+                                                                        .blue
+                                                                        .value),
+                                                                borderRadius: const pw
+                                                                    .BorderRadius.all(
+                                                                    pw.Radius
+                                                                        .circular(
+                                                                            10))),
+                                                            child: pw.Text(
+                                                                skills
+                                                                    .toString(),
+                                                                style: pw.TextStyle(
+                                                                    fontWeight: pw
+                                                                        .FontWeight
+                                                                        .bold,
+                                                                    color: PdfColor
+                                                                        .fromInt(Colors
+                                                                            .white
+                                                                            .value))),
                                                           ),
-                                                              pw.SizedBox(height: 10),
+                                                          pw.SizedBox(
+                                                              height: 10),
                                                           pw.Image(
                                                             image,
                                                             width: 70,
@@ -572,21 +597,66 @@ class _FinalState extends State<Final> with SingleTickerProviderStateMixin {
             },
           ))
         : Scaffold(
-            body: Center(
-                child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text("This Feature will be updates soon"),
-                ElevatedButton(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              title: Text("Scroll to view samples"),
+              elevation: 1,
+              actions: [
+                IconButton(
                     onPressed: () {
                       Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Home()));
+                        context,
+                        MaterialPageRoute(builder: (context) => const Home()),
+                      );
                     },
-                    child: const Text('Home'))
+                    icon: Container(
+                        color: primarycolor,
+                        child: Padding(
+                          padding: const EdgeInsets.all(3.0),
+                          child: Icon(
+                            Icons.home,
+                            color: Colors.white,
+                          ),
+                        )))
               ],
-            )),
+            ),
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Card(
+                    elevation: 4.0,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            PremiumTemplate(
+                                path: ConstanceData.sample0, number: "1"),
+                            SizedBox(
+                              width: 7,
+                            ),
+                            PremiumTemplate(
+                                path: ConstanceData.sample1, number: "2"),
+                            SizedBox(
+                              width: 7,
+                            ),
+                            PremiumTemplate(
+                                path: ConstanceData.sample2, number: "3"),
+                            SizedBox(
+                              width: 7,
+                            ),
+                            PremiumTemplate(
+                                path: ConstanceData.sample3, number: "4"),
+                            SizedBox(
+                              width: 7,
+                            ),
+                          ]),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           );
   }
 

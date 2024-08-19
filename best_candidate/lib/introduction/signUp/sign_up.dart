@@ -35,10 +35,10 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     bool canPop = false;
     return PopScope(
-       canPop: canPop,
+      canPop: canPop,
       onPopInvoked: (bool value) {
         setState(() {
-          canPop= !value;
+          canPop = !value;
         });
 
         if (canPop) {
@@ -99,26 +99,30 @@ class _SignUpState extends State<SignUp> {
                         child: Column(
                           children: [
                             OurTextFormField(
-                                label: 'Email',
-                                pasVisible: false,
-                                controller: _emailEditingController,
-                                validatorText: 'Email Required',
-                                regEx: "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]",
-                                regExValidatorText: 'Please enter a valid email',
-                                keyboardType: TextInputType.emailAddress,
-                                iconData: Icons.email, isBio: false,),
+                              label: 'Email',
+                              pasVisible: false,
+                              controller: _emailEditingController,
+                              validatorText: 'Email Required',
+                              regEx: "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]",
+                              regExValidatorText: 'Please enter a valid email',
+                              keyboardType: TextInputType.emailAddress,
+                              iconData: Icons.email,
+                              isBio: false,
+                            ),
                             const SizedBox(
                               height: 20,
                             ),
                             OurTextFormField(
-                                label: "Phone",
-                                pasVisible: false,
-                                controller: phoneEditingController,
-                                validatorText: 'Phone Required',
-                                regEx: '',
-                                regExValidatorText: '',
-                                keyboardType: TextInputType.phone,
-                                iconData: Icons.phone, isBio: false,),
+                              label: "Phone",
+                              pasVisible: false,
+                              controller: phoneEditingController,
+                              validatorText: 'Phone Required',
+                              regEx: '',
+                              regExValidatorText: '',
+                              keyboardType: TextInputType.phone,
+                              iconData: Icons.phone,
+                              isBio: false,
+                            ),
                             const SizedBox(
                               height: 20,
                             ),
@@ -132,7 +136,8 @@ class _SignUpState extends State<SignUp> {
                               keyboardType: TextInputType.text,
                               iconData: Icons.person,
                               pasVisible: false,
-                              controller: _firstNameController, isBio: false,
+                              controller: _firstNameController,
+                              isBio: false,
                             ),
                             const SizedBox(
                               height: 20,
@@ -147,7 +152,8 @@ class _SignUpState extends State<SignUp> {
                               keyboardType: TextInputType.text,
                               iconData: Icons.person,
                               pasVisible: false,
-                              controller: _lastNameController, isBio: false,
+                              controller: _lastNameController,
+                              isBio: false,
                             ),
                             const SizedBox(
                               height: 20,
@@ -160,7 +166,8 @@ class _SignUpState extends State<SignUp> {
                               keyboardType: TextInputType.text,
                               iconData: Icons.person,
                               controller: _userNameController,
-                              pasVisible: false, isBio: false,
+                              pasVisible: false,
+                              isBio: false,
                             ),
                             const SizedBox(
                               height: 20,
@@ -179,7 +186,8 @@ class _SignUpState extends State<SignUp> {
                               keyboardType: TextInputType.text,
                               iconData: Icons.key,
                               controller: _passwordEditingController,
-                              pasVisible: true, isBio: false,
+                              pasVisible: true,
+                              isBio: false,
                             ),
                           ],
                         )),
@@ -216,8 +224,8 @@ class _SignUpState extends State<SignUp> {
                       child: ElevatedButton(
                         onPressed: () {
                           //
-                           register(_emailEditingController.text,
-                                  _passwordEditingController.text);
+                          register(_emailEditingController.text,
+                              _passwordEditingController.text);
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: lightGreyColor,

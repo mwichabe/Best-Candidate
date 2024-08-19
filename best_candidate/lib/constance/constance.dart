@@ -54,9 +54,12 @@ showToast(String? message) => Fluttertoast.showToast(
 
 class ConstanceData {
   //
-  static String consumerKey ="hyfVQv3FvvKgbhPpcUbg4aMf7bW4ThHknTf4UP4v0qpCsKkP";
-  static String consumerSecret="tJy9Gs3ATOiOP51LSaWILC9odHkWF0D79DZZncVGJdNVFd7mdjGNQT4G7MRgwuGb";
-  static String testCredentials="dIxD2TC9UVNVjp2ZPP5OavBrgHKymDaqMBS3cmzLyN8zyB/x73GRgV+Ddow9YPlOKLKhcaJ80IcX6Fwh0ENGUJ8C5AefcqYNt8fh7VLG2ubz4BzXKyF0Qt7ZPQI0nlcFyD/yJySuAg4SpOXfirWR5dUTW4ESYAuCD/VvF2EUiD9s0NRGbOQ3Vl9GWYlU+D56nJhovNVTfDAa2JtO9x1DicJ7MzcGYCuwaXffRi4IbwCyadE+l8KiqauKs3GkQQGgF1d8DJp8Fhh+xThaBryVWPSQevPFMpK8F66VcU/dxX81wdb84xg0H/M/Cd5uaone9XvL/cBllWyEAjUtNGj7sQ==";
+  static String consumerKey =
+      "hyfVQv3FvvKgbhPpcUbg4aMf7bW4ThHknTf4UP4v0qpCsKkP";
+  static String consumerSecret =
+      "tJy9Gs3ATOiOP51LSaWILC9odHkWF0D79DZZncVGJdNVFd7mdjGNQT4G7MRgwuGb";
+  static String testCredentials =
+      "dIxD2TC9UVNVjp2ZPP5OavBrgHKymDaqMBS3cmzLyN8zyB/x73GRgV+Ddow9YPlOKLKhcaJ80IcX6Fwh0ENGUJ8C5AefcqYNt8fh7VLG2ubz4BzXKyF0Qt7ZPQI0nlcFyD/yJySuAg4SpOXfirWR5dUTW4ESYAuCD/VvF2EUiD9s0NRGbOQ3Vl9GWYlU+D56nJhovNVTfDAa2JtO9x1DicJ7MzcGYCuwaXffRi4IbwCyadE+l8KiqauKs3GkQQGgF1d8DJp8Fhh+xThaBryVWPSQevPFMpK8F66VcU/dxX81wdb84xg0H/M/Cd5uaone9XvL/cBllWyEAjUtNGj7sQ==";
   ///////////////////////////////////////////////
   static String bseImageUrl = 'assets/images/';
   static String splashBg = bseImageUrl + "background.png";
@@ -64,20 +67,21 @@ class ConstanceData {
   static String success = bseImageUrl + "success.jpg";
   static String cartEmpty = bseImageUrl + "cart_empty.png";
   static String internet = bseImageUrl + "internet.jpg";
-
+  static String sample0 = bseImageUrl + "jack_sparrow.png";
+  static String sample1 = bseImageUrl + "sample2.png";
+  static String sample2 = bseImageUrl + "sample3.png";
+  static String sample3 = bseImageUrl + "sample4.png";
 
   ////////////////////////////////////////////
   static String bseIconUrl = 'assets/icons/';
-  static String paypal= bseIconUrl + "paypal_logo.jpg";
-  static String mpesa= bseIconUrl + "mpsea_logo.png";
-
+  static String paypal = bseIconUrl + "paypal_logo.jpg";
+  static String mpesa = bseIconUrl + "mpsea_logo.png";
 
   //static String bseJsonUrl = "assets/jsonImage/";
   //////////////////////////////////////////
   ///
   static String bseVideoUrl = "assets/videos/";
   static String logoVideo = bseImageUrl + "Best_candidate.mp4";
-
 
   List<String> colors = [
     '#f4651f',
